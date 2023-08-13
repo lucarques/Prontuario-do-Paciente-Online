@@ -18,7 +18,7 @@ namespace Prontuario_do_Paciente_Online.Models
         [Display(Name = "Sexo")]
         public char Sexo { get; set; }
 
-        [Column("Cpf")]
+        [Column("CPF")]
         [Display(Name = "CPF")]
         public string CPF { get; set; }
 
@@ -45,6 +45,10 @@ namespace Prontuario_do_Paciente_Online.Models
         [Column("Motivo")]
         [Display(Name = "Motivo da internação")]
         public string Motivo { get; set; }
+
+        [Column("Possui Acompanhante")]
+        [Display(Name = "Possui Acompanhante")]
+        public bool PossuiAcompanhante { get; set; }
 
     }
 }

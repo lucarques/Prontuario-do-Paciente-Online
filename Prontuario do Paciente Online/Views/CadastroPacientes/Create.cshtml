@@ -1,12 +1,9 @@
 ﻿@model Prontuario_do_Paciente_Online.Models.CadastroPaciente
-
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>CadastroPaciente</h4>
+<h1>Cadastro do Paciente</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,7 +16,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
+                <select asp-for="Sexo" class="form-control">
+                    <option value="">SELECIONE</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -49,7 +50,36 @@
             </div>
             <div class="form-group">
                 <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
+                <select asp-for="Estado" class="form-control">
+                    <option value="">SELECIONE</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espirito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -57,17 +87,27 @@
                 <input asp-for="Motivo" class="form-control" />
                 <span asp-validation-for="Motivo" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PossuiAcompanhante" /> @Html.DisplayNameFor(model => model.PossuiAcompanhante)
+                </label>
+            </div>
+            <div id="content">
+
+            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <br>
+                <input type="submit" value="Cadastrar" class="btn btn-primary float-right" />
+                <a class="btn btn-secondary" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/scripts/CadastroPaciente.js"></script>
+    }
+       
 }
