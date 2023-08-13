@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Prontuario do Paciente Online/wwwroot/lib/bootstrap/dist/css/bootstrap.css
+/Prontuario do Paciente Online/Scripts/CadastroPaciente.js
