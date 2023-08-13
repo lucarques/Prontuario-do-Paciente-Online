@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Prontuario_do_Paciente_Online.Models
 {
-    [Table("Paciente")]
-    public class CadastroPaciente
+    [Table("PacienteXAcompanhante")]
+    public class PacienteXAcompanhante
     {
         [Column("Id")]
         [Display(Name ="Código")]
@@ -46,9 +46,24 @@ namespace Prontuario_do_Paciente_Online.Models
         [Display(Name = "Motivo da internação")]
         public string Motivo { get; set; }
 
-        [Column("Possui Acompanhante")]
-        [Display(Name = "Possui Acompanhante")]
-        public bool PossuiAcompanhante { get; set; }
+        [Column("NomeAcompanhante")]
+        [Display(Name = "Nome")]
+        public string NomeAcompanhante { get; set; }
 
+        [Column("CPFAcompanhante")]
+        [Display(Name = "CPF")]
+        public string CPFAcompanhante { get; set; }
+
+        [Column("Email")]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
+
+        [Column("Celular")]
+        [Display(Name = "Celular")]
+        public string Celular { get; set; }
+
+        [Column("GrauParentesco")]
+        [Display(Name = "Grau de Parentesco")]
+        public string GrauParentesco { get; set; }
     }
 }

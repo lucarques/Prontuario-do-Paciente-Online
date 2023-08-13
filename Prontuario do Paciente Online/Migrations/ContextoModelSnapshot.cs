@@ -21,49 +21,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.CadastroAcompanhante", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CPF")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("CPF");
-
-                    b.Property<string>("Celular")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Celular");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Email");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Nome");
-
-                    b.Property<char>("Sexo")
-                        .HasColumnType("character(1)")
-                        .HasColumnName("Sexo");
-
-                    b.Property<bool>("UtilizarApp")
-                        .HasColumnType("boolean")
-                        .HasColumnName("UtilizarOnpront");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Acompanhante");
-                });
-
-            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.CadastroPaciente", b =>
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.PacienteXAcompanhante", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,10 +40,25 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasColumnType("text")
                         .HasColumnName("CPF");
 
+                    b.Property<string>("CPFAcompanhante")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CPFAcompanhante");
+
+                    b.Property<string>("Celular")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Celular");
+
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("Cidade");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -97,6 +70,11 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Estado");
 
+                    b.Property<string>("GrauParentesco")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("GrauParentesco");
+
                     b.Property<string>("Motivo")
                         .IsRequired()
                         .HasColumnType("text")
@@ -107,13 +85,14 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Nome");
 
+                    b.Property<string>("NomeAcompanhante")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("NomeAcompanhante");
+
                     b.Property<int>("Numero")
                         .HasColumnType("integer")
                         .HasColumnName("Numero");
-
-                    b.Property<bool>("PossuiAcompanhante")
-                        .HasColumnType("boolean")
-                        .HasColumnName("Possui Acompanhante");
 
                     b.Property<char>("Sexo")
                         .HasColumnType("character(1)")
@@ -121,7 +100,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Paciente");
+                    b.ToTable("PacienteXAcompanhante");
                 });
 #pragma warning restore 612, 618
         }

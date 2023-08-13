@@ -28,14 +28,20 @@
                                 Cadastrar
                             </a>
                             <div class="dropdown-menu" aria-labelledby="cadastroSubMenu">
-                                <a class="dropdown-item" asp-area="" asp-controller="CadastroPacientes" asp-action="Index">Pacientes</a>
-@*                                <a class="dropdown-item" asp-area="" asp-controller="CadastroAcompanhantes" asp-action="Index">Acompanhantes</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="UsuarioInterno" asp-action="Index">Usuário Interno</a>*@
+                                <a class="dropdown-item" asp-area="" asp-controller="PacienteXAcompanhante" asp-action="Index">Pacientes</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-danger dropdown-toggle disabled" href="#" id="cadastroSubMenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Prontuário
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="cadastroSubMenu">
+                                <a class="dropdown-item" asp-area="" asp-controller="PacienteXAcompanhante" asp-action="Index">Adicionar Prontuário</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="PacienteXAcompanhante" asp-action="Index">Vizualizar Prontuário</a>
                             </div>
                         </li>
                     </ul>
                 </div>
-
             </div>
         </nav>
     </header>

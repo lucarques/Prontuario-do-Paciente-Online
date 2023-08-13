@@ -11,7 +11,7 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230812174005_Criacao-Inicial")]
+    [Migration("20230813210121_Criacao-Inicial")]
     partial class CriacaoInicial
     {
         /// <inheritdoc />
@@ -24,7 +24,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.CadastroPaciente", b =>
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.PacienteXAcompanhante", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,12 +41,27 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("Cpf");
+                        .HasColumnName("CPF");
+
+                    b.Property<string>("CPFAcompanhante")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CPFAcompanhante");
+
+                    b.Property<string>("Celular")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Celular");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("Cidade");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -58,6 +73,11 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Estado");
 
+                    b.Property<string>("GrauParentesco")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("GrauParentesco");
+
                     b.Property<string>("Motivo")
                         .IsRequired()
                         .HasColumnType("text")
@@ -67,6 +87,11 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("Nome");
+
+                    b.Property<string>("NomeAcompanhante")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("NomeAcompanhante");
 
                     b.Property<int>("Numero")
                         .HasColumnType("integer")
@@ -78,7 +103,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Paciente");
+                    b.ToTable("PacienteXAcompanhante");
                 });
 #pragma warning restore 612, 618
         }

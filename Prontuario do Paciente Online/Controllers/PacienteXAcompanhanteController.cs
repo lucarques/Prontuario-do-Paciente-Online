@@ -9,87 +9,87 @@ using Prontuario_do_Paciente_Online.Models;
 
 namespace Prontuario_do_Paciente_Online.Controllers
 {
-    public class CadastroAcompanhantesController : Controller
+    public class PacienteXAcompanhanteController : Controller
     {
         private readonly Contexto _context;
 
-        public CadastroAcompanhantesController(Contexto context)
+        public PacienteXAcompanhanteController(Contexto context)
         {
             _context = context;
         }
 
-        // GET: CadastroAcompanhantes
+        // GET: PacienteXAcompanhante
         public async Task<IActionResult> Index()
         {
-              return _context.CadastroAcompanhante != null ? 
-                          View(await _context.CadastroAcompanhante.ToListAsync()) :
-                          Problem("Entity set 'Contexto.CadastroAcompanhante'  is null.");
+              return _context.Pacientes != null ? 
+                          View(await _context.Pacientes.ToListAsync()) :
+                          Problem("Entity set 'Contexto.Pacientes'  is null.");
         }
 
-        // GET: CadastroAcompanhantes/Details/5
+        // GET: PacienteXAcompanhante/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.CadastroAcompanhante == null)
+            if (id == null || _context.Pacientes == null)
             {
                 return NotFound();
             }
 
-            var cadastroAcompanhante = await _context.CadastroAcompanhante
+            var pacienteXAcompanhante = await _context.Pacientes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cadastroAcompanhante == null)
+            if (pacienteXAcompanhante == null)
             {
                 return NotFound();
             }
 
-            return View(cadastroAcompanhante);
+            return View(pacienteXAcompanhante);
         }
 
-        // GET: CadastroAcompanhantes/Create
+        // GET: PacienteXAcompanhante/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CadastroAcompanhantes/Create
+        // POST: PacienteXAcompanhante/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Sexo,CPF,Email,Celular,UtilizarApp")] CadastroAcompanhante cadastroAcompanhante)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Sexo,CPF,Endereco,Numero,Bairro,Cidade,Estado,Motivo,NomeAcompanhante,CPFAcompanhante,Email,Celular,GrauParentesco")] PacienteXAcompanhante pacienteXAcompanhante)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cadastroAcompanhante);
+                _context.Add(pacienteXAcompanhante);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cadastroAcompanhante);
+            return View(pacienteXAcompanhante);
         }
 
-        // GET: CadastroAcompanhantes/Edit/5
+        // GET: PacienteXAcompanhante/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.CadastroAcompanhante == null)
+            if (id == null || _context.Pacientes == null)
             {
                 return NotFound();
             }
 
-            var cadastroAcompanhante = await _context.CadastroAcompanhante.FindAsync(id);
-            if (cadastroAcompanhante == null)
+            var pacienteXAcompanhante = await _context.Pacientes.FindAsync(id);
+            if (pacienteXAcompanhante == null)
             {
                 return NotFound();
             }
-            return View(cadastroAcompanhante);
+            return View(pacienteXAcompanhante);
         }
 
-        // POST: CadastroAcompanhantes/Edit/5
+        // POST: PacienteXAcompanhante/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sexo,CPF,Email,Celular,UtilizarApp")] CadastroAcompanhante cadastroAcompanhante)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sexo,CPF,Endereco,Numero,Bairro,Cidade,Estado,Motivo,NomeAcompanhante,CPFAcompanhante,Email,Celular,GrauParentesco")] PacienteXAcompanhante pacienteXAcompanhante)
         {
-            if (id != cadastroAcompanhante.Id)
+            if (id != pacienteXAcompanhante.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace Prontuario_do_Paciente_Online.Controllers
             {
                 try
                 {
-                    _context.Update(cadastroAcompanhante);
+                    _context.Update(pacienteXAcompanhante);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CadastroAcompanhanteExists(cadastroAcompanhante.Id))
+                    if (!PacienteXAcompanhanteExists(pacienteXAcompanhante.Id))
                     {
                         return NotFound();
                     }
@@ -114,49 +114,49 @@ namespace Prontuario_do_Paciente_Online.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cadastroAcompanhante);
+            return View(pacienteXAcompanhante);
         }
 
-        // GET: CadastroAcompanhantes/Delete/5
+        // GET: PacienteXAcompanhante/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.CadastroAcompanhante == null)
+            if (id == null || _context.Pacientes == null)
             {
                 return NotFound();
             }
 
-            var cadastroAcompanhante = await _context.CadastroAcompanhante
+            var pacienteXAcompanhante = await _context.Pacientes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cadastroAcompanhante == null)
+            if (pacienteXAcompanhante == null)
             {
                 return NotFound();
             }
 
-            return View(cadastroAcompanhante);
+            return View(pacienteXAcompanhante);
         }
 
-        // POST: CadastroAcompanhantes/Delete/5
+        // POST: PacienteXAcompanhante/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.CadastroAcompanhante == null)
+            if (_context.Pacientes == null)
             {
-                return Problem("Entity set 'Contexto.CadastroAcompanhante'  is null.");
+                return Problem("Entity set 'Contexto.Pacientes'  is null.");
             }
-            var cadastroAcompanhante = await _context.CadastroAcompanhante.FindAsync(id);
-            if (cadastroAcompanhante != null)
+            var pacienteXAcompanhante = await _context.Pacientes.FindAsync(id);
+            if (pacienteXAcompanhante != null)
             {
-                _context.CadastroAcompanhante.Remove(cadastroAcompanhante);
+                _context.Pacientes.Remove(pacienteXAcompanhante);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CadastroAcompanhanteExists(int id)
+        private bool PacienteXAcompanhanteExists(int id)
         {
-          return (_context.CadastroAcompanhante?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Pacientes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
