@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Prontuario_do_Paciente_Online.Models;
+using Prontuario_do_Paciente_Online.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<PacienteService>();
 
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(options => 

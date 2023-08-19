@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Prontuario_do_Paciente_Online.Models.Paciente>;
+@{
+    ViewData["Title"] = "Pacientes Cadastrados";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cpf</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Idade</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cidade</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereco</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Numero</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Motivo da Internacao</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @item.Nome
+                        </td>
+                        <td class="align-middle">
+                            @item.Nome
+                        </td>
+                        <td class="align-middle">
+                            @item.Cpf
+                        </td>
+                        <td class="align-middle">
+                            @item.Idade
+                        </td>
+                        <td class="align-middle">
+                            @item.Estado
+                        </td>
+                        <td class="align-middle">
+                            @item.Cidade
+                        </td>
+                        <td class="align-middle">
+                            @item.Endereco
+                        </td>
+                        <td class="align-middle">
+                            @item.Numero
+                        </td>
+                        <td class="align-middle">
+                            @item.MotivoInternacao
+                        </td>
+                        <td class="align-middle">
+                            @item.StatusPaciente
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+

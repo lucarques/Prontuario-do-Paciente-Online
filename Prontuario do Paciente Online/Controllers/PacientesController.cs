@@ -1,14 +1,22 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Prontuario_do_Paciente_Online.Services;
 
 namespace Prontuario_do_Paciente_Online.Controllers
 {
-    public class PacienteController : Controller
+    public class PacientesController : Controller
     {
+        private readonly PacienteService _pacienteService;
+        public PacientesController(PacienteService pacienteService)
+        {
+            _pacienteService = pacienteService;
+        }
+
         // GET: PacienteController
         public ActionResult Index()
         {
-            return View();
+            var list = _pacienteService.ObterTodos();
+            return View(list);
         }
 
         // GET: PacienteController/Details/5

@@ -7,7 +7,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
     {
         public int Id { get; set; }
         public Acompanhante Acompanhante { get; set; }
-        public Pacientes Paciente { get; set; }
+        public Paciente Paciente { get; set; }
         public List<EnumStatus>? StatusPaciente { get; set; }
     }
 }
