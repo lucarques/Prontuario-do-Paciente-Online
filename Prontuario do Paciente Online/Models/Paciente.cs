@@ -1,4 +1,5 @@
-﻿using Prontuario_do_Paciente_Online.Models.Enums;
+﻿using Prontuario_do_Paciente_Online.Controllers;
+using Prontuario_do_Paciente_Online.Models.Enums;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -35,6 +36,11 @@ namespace Prontuario_do_Paciente_Online.Models
             MotivoInternacao = motivoInternacao;
             Acompanhante = acompanhante;
             StatusPaciente = statusPaciente;
+        }
+
+        public void ObterDetalhes(int id)
+        {
+            
         }
     }
 }

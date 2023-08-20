@@ -9,23 +9,21 @@
     <div class="table-responsive">
         <table class="table align-items-center mb-0">
             <thead>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cpf</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Idade</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cidade</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereco</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Numero</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Motivo da Internacao</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cpf</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Idade</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cidade</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereco</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Numero</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Motivo da Internacao</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="align-middle">
-                            @item.Nome
-                        </td>
                         <td class="align-middle">
                             @item.Nome
                         </td>
@@ -53,6 +51,19 @@
                         <td class="align-middle">
                             @item.StatusPaciente
                         </td>
+
+                        <td class="align-middle position-relative">
+                            <div class="dropdown position-static">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ações
+                                </button>
+                                <div class="dropdown-menu position-absolute" style="right: 0;">
+                                    <a class="dropdown-item details-button" data-id="@item.Id">Detalhes</a>
+                                    <a class="dropdown-item" href="#">Editar</a>
+                                </div>
+                            </div>
+                        </td>
+
                     </tr>
                 }
             </tbody>
@@ -60,6 +71,8 @@
     </div>
 </div>
 
+
+<script src="./Scripts/Paciente.js"></script>
 
 
 

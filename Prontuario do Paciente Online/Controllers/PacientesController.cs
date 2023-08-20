@@ -22,7 +22,8 @@ namespace Prontuario_do_Paciente_Online.Controllers
         // GET: PacienteController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var list = _pacienteService.ObterDetalhes(id);
+            return View(list);
         }
 
         // GET: PacienteController/Create

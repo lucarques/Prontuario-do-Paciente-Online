@@ -1,4 +1,6 @@
-﻿using Prontuario_do_Paciente_Online.Models;
+﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.EntityFrameworkCore;
+using Prontuario_do_Paciente_Online.Models;
 
 namespace Prontuario_do_Paciente_Online.Services
 {
@@ -13,6 +15,11 @@ namespace Prontuario_do_Paciente_Online.Services
         public IEnumerable<Paciente> ObterTodos()
         {
             return _context.Paciente.ToList();
+        }
+
+        public IEnumerable<Paciente> ObterDetalhes(int id)
+        {
+            return _context.Paciente.Include(x => x.Acompanhante).ToList();
         }
     }
 }
