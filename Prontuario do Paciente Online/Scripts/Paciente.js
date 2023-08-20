@@ -5,13 +5,13 @@
         var patientId = $(this).data('id');
 
         $.ajax({
-            url: '/Pacientes/Details/' + patientId, // Substitua pelo caminho correto
+            url: '/Pacientes/Details/' + patientId,
             type: 'GET',
             success: function (response) {
-                console.log('Detalhes do Paciente:', response);
+                
             },
             error: function (error) {
-                console.error('Erro ao carregar detalhes do paciente:', error);
+                
             }
         });
     });
