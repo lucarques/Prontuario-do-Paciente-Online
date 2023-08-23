@@ -1,0 +1,204 @@
+﻿@model IEnumerable<Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel>;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>Cadastro do Paciente</h1>
+<html>
+<body>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pessoa-nome" class="form-control-label">Nome</label>
+                        <input class="form-control" type="text" id="pessoa-nome" placeholder="Digite o nome">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pessoa-idade" class="form-control-label">Idade</label>
+                        <input class="form-control" type="number" id="pessoa-idade" placeholder="Digite a idade">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pessoa-cpf" class="form-control-label">CPF</label>
+                        <input class="form-control" type="text" id="pessoa-cpf" placeholder="Digite o CPF">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="endereco-estado" class="form-control-label">Estado</label>
+                        <select class="form-control" id="endereco-estado">
+                            <option value="" disabled selected>Selecione um estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="endereco-cidade" class="form-control-label">Cidade</label>
+                        <input class="form-control" type="text" id="endereco-cidade"placeholder="Digite a cidade">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="endereco-rua" class="form-control-label">Endereço</label>
+                        <input class="form-control" type="text" id="endereco-rua" placeholder="Digite o nome da rua">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="endereco-numero" class="form-control-label">Número</label>
+                        <input class="form-control" type="number" id="endereco-numero" placeholder="Digite o numero da residência">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="justificativa">Motivo da internação</label>
+                        <textarea class="form-control" id="justificativa" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr />
+    </div>
+    <h4>Dados do Acompanhante</h4>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pessoa-nome" class="form-control-label">Nome</label>
+                        <input class="form-control" type="text" id="pessoa-nome" placeholder="Digite o nome do acompanhante">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pessoa-cpf" class="form-control-label">CPF</label>
+                        <input class="form-control" type="text" id="pessoa-cpf" placeholder="Digite o CPF">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="endereco-estado" class="form-control-label">Estado</label>
+                        <select class="form-control" id="endereco-estado-acompanhante">
+                            <option value="" disabled selected>Selecione um estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="endereco-cidade" class="form-control-label">Cidade</label>
+                        <input class="form-control" type="text" id="endereco-cidade" placeholder="Digite a cidade">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="endereco-rua" class="form-control-label">Endereço</label>
+                        <input class="form-control" type="text" id="endereco-rua" placeholder="Digite o nome da rua">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="endereco-numero" class="form-control-label">Número</label>
+                        <input class="form-control" type="number" id="endereco-numero" placeholder="Digite o numero da residência">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="pessoa-nome" class="form-control-label">Grau de parentesco</label>
+                        <input class="form-control" type="text" id="pessoa-grau-parentesco" placeholder="Digite o grau de parentesco">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pessoa-nome" class="form-control-label">E-mail</label>
+                        <input class="form-control" type="text" id="pessoa-email" placeholder="Digite o e-mail">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="pessoa-nome" class="form-control-label">Senha de acesso</label>
+                        <input class="form-control" type="password" id="pessoa-senha-acesso" placeholder="Digite a senha">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="pessoa-nome" class="form-control-label">Confirme a senha</label>
+                        <input class="form-control" type="password" id="pessoa-senha-acesso-confirme" placeholder="Digite a senha novamente">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+        <button type="button" class="btn btn-primary btn-sm">Salvar</button>
+    </div>
+</body>
+</html>

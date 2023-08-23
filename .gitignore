@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /Prontuario do Paciente Online/wwwroot/lib/bootstrap/dist/css/bootstrap.css
 /Prontuario do Paciente Online/Scripts/CadastroPaciente.js
 /Prontuario do Paciente Online/Views/Shared/_LayoutAdmin.cshtml
+/Prontuario do Paciente Online/Views/Pacientes/Index.cshtml
