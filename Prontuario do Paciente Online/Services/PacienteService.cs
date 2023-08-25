@@ -75,6 +75,7 @@ namespace Prontuario_do_Paciente_Online.Services
                             Usuario = model.Acompanhante.UsuarioAcesso!.Usuario,
                             Email = model.Acompanhante.UsuarioAcesso!.Email,
                             SenhaAcesso = model.Acompanhante.UsuarioAcesso!.SenhaAcesso,
+                            TipoAcesso = model.Acompanhante.UsuarioAcesso!.TipoAcesso
                         }
                     }
                 };
