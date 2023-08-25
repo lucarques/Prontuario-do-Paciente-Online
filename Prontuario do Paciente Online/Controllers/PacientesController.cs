@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Prontuario_do_Paciente_Online.Services;
+using Prontuario_do_Paciente_Online.ViewModels;
 
 namespace Prontuario_do_Paciente_Online.Controllers
 {
@@ -35,16 +36,21 @@ namespace Prontuario_do_Paciente_Online.Controllers
         // POST: PacienteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PacientesViewModel model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _pacienteService.CadastrarPaciente(model);
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
+                return View(model);
             }
+            return View(model);
         }
 
         // GET: PacienteController/Edit/5

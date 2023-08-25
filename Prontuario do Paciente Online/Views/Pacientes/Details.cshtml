@@ -5,4 +5,74 @@
 }
 
 <h1>Detalhes do Paciente</h1>
+<card>
 
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>@Model.Nome</td>
+        </tr>
+        <tr>
+            <td>Idade</td>
+            <td>@Model.Idade</td>
+        </tr>
+        <tr>
+            <td>CPF</td>
+            <td>@Model.Cpf</td>
+        </tr>
+        <tr>
+            <td>Estado</td>
+            <td>@Model.Estado</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>@Model.Cidade</td>
+        </tr>
+        <tr>
+            <td>Endereco</td>
+            <td>@Model.Endereco</td>
+        </tr>
+        <tr>
+            <td>Número</td>
+            <td>@Model.Numero</td>
+        </tr>
+        <tr>
+            <td>Motivo</td>
+            <td>@Model.MotivoInternacao</td>
+        </tr>
+    </table>
+
+    <h3> Dados do acompanhante</h3>
+    <table class="table">
+        <tr>
+            <td>Nome do Acompanhante</td>
+            <td>@Model.Acompanhante.NomeAcompanhante</td>
+        </tr>
+        <tr>
+            <td>CPF do Acompanhante</td>
+            <td>@Model.Acompanhante.CpfAcompanhante</td>
+        </tr>
+        <tr>
+            <td>Estado</td>
+            <td>@Model.Acompanhante.EstadoAcompanhante</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>@Model.Acompanhante.CidadeAcompanhante</td>
+        </tr>
+        <tr>
+            <td>Endereço</td>
+            <td>@Model.Acompanhante.EnderecoAcompanhante</td>
+        </tr>
+        <tr>
+            <td>Numero</td>
+            <td>@Model.Acompanhante.NumeroAcompanhante</td>
+        </tr>
+        <tr>
+            <td>Grau de parentesco</td>
+            <td>@Model.Acompanhante.GrauParentesco</td>
+        </tr>
+
+    </table>
+
+</card>

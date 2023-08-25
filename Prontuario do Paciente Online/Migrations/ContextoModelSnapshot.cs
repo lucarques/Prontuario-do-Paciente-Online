@@ -29,23 +29,19 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cidade")
+                    b.Property<string>("CidadeAcompanhante")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Cpf")
+                    b.Property<string>("CpfAcompanhante")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("EnderecoAcompanhante")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Estado")
+                    b.Property<string>("EstadoAcompanhante")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -53,18 +49,19 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("NomeAcompanhante")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Numero")
+                    b.Property<int>("NumeroAcompanhante")
                         .HasColumnType("integer");
 
-                    b.Property<string>("SenhaAcessoAcompanhante")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("UsuarioAcessoId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioAcessoId");
 
                     b.ToTable("Acompanhante");
                 });
@@ -96,9 +93,8 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Idade")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Idade")
+                        .HasColumnType("integer");
 
                     b.Property<string>("MotivoInternacao")
                         .IsRequired()
@@ -119,6 +115,45 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.HasIndex("AcompanhanteId");
 
                     b.ToTable("Paciente");
+                });
+
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.UsuarioAcesso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SenhaAcesso")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TipoAcesso")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsuarioAcesso");
+                });
+
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Acompanhante", b =>
+                {
+                    b.HasOne("Prontuario_do_Paciente_Online.Models.UsuarioAcesso", "UsuarioAcesso")
+                        .WithMany()
+                        .HasForeignKey("UsuarioAcessoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UsuarioAcesso");
                 });
 
             modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Paciente", b =>
