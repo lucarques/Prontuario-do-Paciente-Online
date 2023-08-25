@@ -11,6 +11,7 @@ namespace Prontuario_do_Paciente_Online.Models
         }
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Acompanhante> Acompanhante { get; set; }
+        public DbSet<UsuarioAcesso> UsuarioAcesso { get; set; }
     }
 }
  

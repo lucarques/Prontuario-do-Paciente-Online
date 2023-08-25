@@ -9,7 +9,7 @@ namespace Prontuario_do_Paciente_Online.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Idade { get; set; }
+        public int Idade { get; set; }
         public string Cpf { get; set; }
         public string Estado { get; set; }
         public string Cidade { get; set; }
@@ -23,7 +23,7 @@ namespace Prontuario_do_Paciente_Online.Models
         {
         }
 
-        public Paciente(int id, string nome, string idade, string cpf, string estado, string cidade, string endereco, int numero, string motivoInternacao, Acompanhante acompanhante, EnumStatus statusPaciente)
+        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string motivoInternacao, Acompanhante acompanhante, EnumStatus statusPaciente)
         {
             Id = id;
             Nome = nome;
@@ -36,11 +36,6 @@ namespace Prontuario_do_Paciente_Online.Models
             MotivoInternacao = motivoInternacao;
             Acompanhante = acompanhante;
             StatusPaciente = statusPaciente;
-        }
-
-        public void ObterDetalhes(int id)
-        {
-            
         }
     }
 }
