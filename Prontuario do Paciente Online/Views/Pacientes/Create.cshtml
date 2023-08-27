@@ -1,7 +1,7 @@
 ﻿@using Prontuario_do_Paciente_Online.Models.Enums;
 @model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastro do Paciente";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
@@ -10,131 +10,40 @@
     }
 </style>
 
-<h1>Cadastro do Paciente</h1>
+<h2>@ViewData["Title"]</h2>
 <html>
-<body>
-    <card>
-
-    </card>
-    <div class="container">
-       @* <div asp-validation-summary="All"></div>*@
-        <form asp-action="Create" method="POST">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Nome" class="form-control-label"></label>
-                        <input asp-for="Nome" class="form-control" placeholder="Digite o nome">
-                        <span asp-validation-for="Nome" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Idade" class="form-control-label"></label>
-                        <input asp-for="Idade" class="form-control" placeholder="Digite a idade">
-                        <span asp-validation-for="Idade" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Cpf" class="form-control-label"></label>
-                        <input asp-for="Cpf" class="form-control" placeholder="Digite o CPF">
-                        <span asp-validation-for="Cpf" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Estado" class="form-control-label"></label>
-                        <select class="form-control" name="Estado">
-                            <option value="" disabled selected>Selecione um estado</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                        </select>
-                        <span asp-validation-for="Estado" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Cidade" class="form-control-label"></label>
-                        <input asp-for="Cidade" class="form-control" placeholder="Digite a Cidade">
-                        <span asp-validation-for="Cidade" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Endereco" class="form-control-label"></label>
-                        <input asp-for="Endereco" class="form-control" placeholder="Digite o nome da rua">
-                        <span asp-validation-for="Endereco" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Numero" class="form-control-label"></label>
-                        <input asp-for="Numero" class="form-control" placeholder="Digite o numero">
-                        <span asp-validation-for="Numero" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label asp-for="MotivoInternacao" class="form-control-label"></label>
-                        <input asp-for="MotivoInternacao" class="form-control" rows="2" placeholder="Digite o motivo da internação">
-                        <span asp-validation-for="MotivoInternacao" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-            <h4>Dados do Acompanhante</h4>
-            <div class="container">
+    <body>
+        <div class="container">
+           @* <div asp-validation-summary="All"></div>*@
+            <form asp-action="Create" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label asp-for="Acompanhante.NomeAcompanhante" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.NomeAcompanhante" class="form-control" placeholder="Digite o nome">
-                            <span asp-validation-for="Acompanhante.NomeAcompanhante" class="text-danger"></span>
+                            <label asp-for="Nome" class="form-control-label"></label>
+                            <input asp-for="Nome" class="form-control" placeholder="Digite o nome">
+                            <span asp-validation-for="Nome" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label asp-for="Acompanhante.CpfAcompanhante" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.CpfAcompanhante" class="form-control" placeholder="Digite o CPF">
-                            <span asp-validation-for="Acompanhante.CpfAcompanhante" class="text-danger"></span>
+                            <label asp-for="Idade" class="form-control-label"></label>
+                            <input asp-for="Idade" class="form-control" placeholder="Digite a idade">
+                            <span asp-validation-for="Idade" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Cpf" class="form-control-label"></label>
+                            <input asp-for="Cpf" class="form-control" placeholder="Digite o CPF">
+                            <span asp-validation-for="Cpf" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label asp-for="Acompanhante.EstadoAcompanhante" class="form-control-label"></label>
-                            <select class="form-control" name="Acompanhante.EstadoAcompanhante">
+                            <label asp-for="Estado" class="form-control-label"></label>
+                            <select class="form-control" name="Estado">
                                 <option value="" disabled selected>Selecione um estado</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
@@ -164,69 +73,157 @@
                                 <option value="SE">Sergipe</option>
                                 <option value="TO">Tocantins</option>
                             </select>
-                            <span asp-validation-for="Acompanhante.EstadoAcompanhante" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Acompanhante.CidadeAcompanhante" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.CidadeAcompanhante" class="form-control" placeholder="Digite a cidade">
-                            <span asp-validation-for="Acompanhante.CidadeAcompanhante" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label asp-for="Acompanhante.EnderecoAcompanhante" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.EnderecoAcompanhante" class="form-control" placeholder="Digite o endereço">
-                            <span asp-validation-for="Acompanhante.EnderecoAcompanhante" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label asp-for="Acompanhante.NumeroAcompanhante" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.NumeroAcompanhante" class="form-control" placeholder="Digite o numero da residencia">
-                            <span asp-validation-for="Acompanhante.NumeroAcompanhante" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label asp-for="Acompanhante.GrauParentesco" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.GrauParentesco" class="form-control" placeholder="Digite o grau de parentesco">
-                            <span asp-validation-for="Acompanhante.GrauParentesco" class="text-danger"></span>
+                            <span asp-validation-for="Estado" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label asp-for="Acompanhante.UsuarioAcesso.Usuario" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.UsuarioAcesso.Usuario" class="form-control" placeholder="Digite o usuario">
-                            <span asp-validation-for="Acompanhante.UsuarioAcesso.Usuario" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Acompanhante.UsuarioAcesso.Email" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.UsuarioAcesso.Email" class="form-control" placeholder="Digite o e-mail">
-                            <span asp-validation-for="Acompanhante.UsuarioAcesso.Email" class="text-danger"></span>
+                            <label asp-for="Cidade" class="form-control-label"></label>
+                            <input asp-for="Cidade" class="form-control" placeholder="Digite a Cidade">
+                            <span asp-validation-for="Cidade" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="form-group" type="password">
-                            <label asp-for="Acompanhante.UsuarioAcesso.SenhaAcesso" class="form-control-label"></label>
-                            <input asp-for="Acompanhante.UsuarioAcesso.SenhaAcesso" class="form-control" placeholder="Senha de acesso">
-                            <span asp-validation-for="Acompanhante.UsuarioAcesso.SenhaAcesso" class="text-danger"></span>
+                        <div class="form-group">
+                            <label asp-for="Endereco" class="form-control-label"></label>
+                            <input asp-for="Endereco" class="form-control" placeholder="Digite o nome da rua">
+                            <span asp-validation-for="Endereco" class="text-danger"></span>
                         </div>
                     </div>
-                    <input type="hidden" asp-for="Acompanhante.UsuarioAcesso.TipoAcesso" value="@((int)EnumTipoAcesso.Acompanhante)"   />
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Numero" class="form-control-label"></label>
+                            <input asp-for="Numero" class="form-control" placeholder="Digite o numero">
+                            <span asp-validation-for="Numero" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-        </form>
-        <div>
-            <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
-            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="MotivoInternacao" class="form-control-label"></label>
+                            <input asp-for="MotivoInternacao" class="form-control" rows="2" placeholder="Digite o motivo da internação">
+                            <span asp-validation-for="MotivoInternacao" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <h4>Dados do Acompanhante</h4>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.NomeAcompanhante" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.NomeAcompanhante" class="form-control" placeholder="Digite o nome">
+                                <span asp-validation-for="Acompanhante.NomeAcompanhante" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.CpfAcompanhante" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.CpfAcompanhante" class="form-control" placeholder="Digite o CPF">
+                                <span asp-validation-for="Acompanhante.CpfAcompanhante" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.EstadoAcompanhante" class="form-control-label"></label>
+                                <select class="form-control" name="Acompanhante.EstadoAcompanhante">
+                                    <option value="" disabled selected>Selecione um estado</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                                <span asp-validation-for="Acompanhante.EstadoAcompanhante" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.CidadeAcompanhante" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.CidadeAcompanhante" class="form-control" placeholder="Digite a cidade">
+                                <span asp-validation-for="Acompanhante.CidadeAcompanhante" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.EnderecoAcompanhante" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.EnderecoAcompanhante" class="form-control" placeholder="Digite o endereço">
+                                <span asp-validation-for="Acompanhante.EnderecoAcompanhante" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.NumeroAcompanhante" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.NumeroAcompanhante" class="form-control" placeholder="Digite o numero da residencia">
+                                <span asp-validation-for="Acompanhante.NumeroAcompanhante" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.GrauParentesco" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.GrauParentesco" class="form-control" placeholder="Digite o grau de parentesco">
+                                <span asp-validation-for="Acompanhante.GrauParentesco" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.UsuarioAcesso.Usuario" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.UsuarioAcesso.Usuario" class="form-control" placeholder="Digite o usuario">
+                                <span asp-validation-for="Acompanhante.UsuarioAcesso.Usuario" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Acompanhante.UsuarioAcesso.Email" class="form-control-label"></label>
+                                <input asp-for="Acompanhante.UsuarioAcesso.Email" class="form-control" placeholder="Digite o e-mail">
+                                <span asp-validation-for="Acompanhante.UsuarioAcesso.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" type="password">
+                                <label asp-for="Acompanhante.UsuarioAcesso.SenhaAcesso" class="form-control-label"></label>
+                                <input type ="password" asp-for="Acompanhante.UsuarioAcesso.SenhaAcesso" class="form-control" placeholder="Senha de acesso">
+                                <span asp-validation-for="Acompanhante.UsuarioAcesso.SenhaAcesso" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="Acompanhante.UsuarioAcesso.TipoAcesso" value="@((int)EnumTipoAcesso.Acompanhante)"   />
+                    </div>
+            </form>
+            <div>
+                <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

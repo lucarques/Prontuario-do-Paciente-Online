@@ -44,7 +44,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Pacientes" asp-action="Create">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="ni ni-fat-add text-success text-sm opacity-10"></i>
+                                    <i class="ni ni-fat-add text-info text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Cadastrar Pacientes</span>
                             </a>
@@ -52,7 +52,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Pacientes" asp-action="Index">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="ni ni-zoom-split-in text-warning text-sm opacity-10"></i>
+                                    <i class="ni ni-zoom-split-in text-info text-sm opacity-10"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Pacientes Cadastrados</span>
                             </a>
@@ -63,25 +63,25 @@
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#submenu-tecnologia">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-settings-gear-65 text-info text-sm opacity-10"></i>
+                            <i class="ni ni-settings-gear-65 text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Tecnologia</span>
                     </a>
                     <ul class="navbar-nav collapse" id="submenu-tecnologia">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="#" asp-action="#">
+                            <a class="nav-link" asp-controller="UsuarioAcesso" asp-action="Create">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="ni ni-fat-add text-success text-sm opacity-10"></i>
+                                    <i class="ni ni-fat-add text-primary text-sm opacity-10 disabled"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Cadastrar Usuario</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="#" asp-action="#">
+                            <a class="nav-link" asp-controller="UsuarioAcesso" asp-action="Index">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
+                                    <i class="ni ni-single-02 text-primary text-sm opacity-10"></i>
                                 </div>
-                                <span class="nav-link-text ms-1">Acessos</span>
+                                <span class="nav-link-text ms-1">Usuarios Cadastrados</span>
                             </a>
                         </li>
                     </ul>
