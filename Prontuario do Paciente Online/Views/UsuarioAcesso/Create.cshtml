@@ -1,0 +1,63 @@
+﻿@using Prontuario_do_Paciente_Online.Models.Enums;
+
+@model Prontuario_do_Paciente_Online.ViewModels.UsuarioAcessoViewModel;
+@{
+    ViewData["Title"] = "Cadastro de Usuário Interno";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .field-validation-error {
+        font-size: 11px;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+<html>
+<body>
+    <div class="container">
+        <form asp-action="Create" method="POST">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Usuario" class="form-control-label"></label>
+                        <input asp-for="Usuario" class="form-control" placeholder="Digite o nome de usuário">
+                        <span asp-validation-for="Usuario" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email" class="form-control-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="exemplo@exemplo.com">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SenhaAcesso" class="form-control-label"></label>
+                        <input type="password" asp-for="SenhaAcesso" class="form-control" placeholder="Digite o senha de acesso">
+                        <span asp-validation-for="SenhaAcesso" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="TipoAcesso" class="form-control-label"></label>
+                        <select class="form-control" name="TipoAcesso">
+                            <option value="" disabled selected>Selecione o tipo de acesso</option>
+                            <option value="@EnumTipoAcesso.Administrativo">Administrativo</option>
+                            <option value="@EnumTipoAcesso.Tecnologia">Tecnologia</option>
+                            <option value="@EnumTipoAcesso.Medico"> Médico</option>
+                        </select>
+                        <span asp-validation-for="TipoAcesso" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
