@@ -11,8 +11,8 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230825152035_PrimeiraDemuitas")]
-    partial class PrimeiraDemuitas
+    [Migration("20230825235411_primeiramigration")]
+    partial class primeiramigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
