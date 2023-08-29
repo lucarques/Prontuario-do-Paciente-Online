@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <h2>@ViewData["Title"]</h2>
-<div class="table">
+<div class="card">
     <div class="table-responsive">
         @if (Model.Any())
         {
@@ -13,22 +13,22 @@
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Idade</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Motivo da Internacao</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Motivo da Internacao</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="align-middle">
-                                @item.Nome
+                            <td class="my-auto">
+                                <h3 class="mb-0 text-xs"> @item.Nome</h3>
                             </td>
-                            <td class="align-middle">
-                                @item.Idade
+                            <td class="my-auto">
+                                <h3 class="mb-0 text-xs"> @item.Idade</h3>
                             </td>
-                            <td class="align-middle">
-                                @item.MotivoInternacao
+                            <td class="my-auto">
+                                <h3 class="mb-0 text-xs"> @item.MotivoInternacao</h3>
                             </td>
                             <td class="align-middle position-relative">
                                 <div class="dropdown position-static">
