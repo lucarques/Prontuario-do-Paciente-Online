@@ -24,7 +24,7 @@ namespace Prontuario_do_Paciente_Online.Services
 
             var viewModel = new PacientesViewModel
             {
-                Nome = paciente.Nome,
+                Nome = paciente!.Nome,
                 Idade = paciente.Idade,
                 Cpf = paciente.Cpf,
                 Estado = paciente.Estado,
@@ -61,6 +61,7 @@ namespace Prontuario_do_Paciente_Online.Services
                     Endereco = model.Endereco!,
                     Numero = model.Numero!,
                     MotivoInternacao = model.MotivoInternacao!,
+                    DataInternacao = model.DataInternacao!,
                     Acompanhante = new Acompanhante
                     {
                         NomeAcompanhante = model.Acompanhante!.NomeAcompanhante,
@@ -70,13 +71,6 @@ namespace Prontuario_do_Paciente_Online.Services
                         EnderecoAcompanhante = model.Acompanhante!.EnderecoAcompanhante,
                         NumeroAcompanhante = model.Acompanhante!.NumeroAcompanhante,
                         GrauParentesco = model.Acompanhante!.GrauParentesco,
-                        UsuarioAcesso = new UsuarioAcesso
-                        {
-                            Usuario = model.Acompanhante.UsuarioAcesso!.Usuario,
-                            Email = model.Acompanhante.UsuarioAcesso!.Email,
-                            SenhaAcesso = model.Acompanhante.UsuarioAcesso!.SenhaAcesso,
-                            TipoAcesso = model.Acompanhante.UsuarioAcesso!.TipoAcesso
-                        }
                     }
                 };
 
@@ -85,10 +79,15 @@ namespace Prontuario_do_Paciente_Online.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine("Detalhes da exceção interna: " + ex.InnerException.Message);
+                }
+                else
+                {
+                    Console.WriteLine("Erro genérico: " + ex.Message);
+                }
             }
-
         }
-
     }
 }

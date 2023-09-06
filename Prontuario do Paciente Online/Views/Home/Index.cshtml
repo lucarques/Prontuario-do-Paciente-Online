@@ -1,7 +1,10 @@
-﻿@model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
+﻿@using Microsoft.AspNetCore.Identity;
+@model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
+@inject UserManager<IdentityUser> UserManager 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <!DOCTYPE html>

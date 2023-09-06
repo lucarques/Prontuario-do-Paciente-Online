@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Pagina do Acompanhante";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h4>@ViewData["Title"]</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Diagnóstico</th>
+                <th>Quarto</th>
+                <th>Médico Responsável</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>João Silva</td>
+                <td>45</td>
+                <td>Pneumonia</td>
+                <td>101</td>
+                <td>Dr. Maria</td>
+                <td>
+                    <a class="btn btn-default btn-sm" href="#">Detalhes</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Maria Santos</td>
+                <td>35</td>
+                <td>Fratura no tornozelo</td>
+                <td>102</td>
+                <td>Dr. Pedro</td>
+                <td>
+                    <a class="btn btn-default btn-sm" href="#">Detalhes</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

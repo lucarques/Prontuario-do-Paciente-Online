@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Prontuario_do_Paciente_Online.Models;
@@ -11,9 +12,11 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230903213108_IdentityMigration")]
+    partial class IdentityMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,12 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("NumeroAcompanhante")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UsuarioAcessoId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioAcessoId");
 
                     b.ToTable("Acompanhante");
                 });
@@ -312,6 +320,34 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.ToTable("Paciente");
                 });
 
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.UsuarioAcesso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SenhaAcesso")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TipoAcesso")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsuarioAcesso");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -361,6 +397,17 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Acompanhante", b =>
+                {
+                    b.HasOne("Prontuario_do_Paciente_Online.Models.UsuarioAcesso", "UsuarioAcesso")
+                        .WithMany()
+                        .HasForeignKey("UsuarioAcessoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UsuarioAcesso");
                 });
 
             modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Paciente", b =>

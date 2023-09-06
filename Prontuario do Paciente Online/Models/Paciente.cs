@@ -16,6 +16,7 @@ namespace Prontuario_do_Paciente_Online.Models
         public string Endereco { get; set; }
         public int Numero { get; set; }
         public string MotivoInternacao { get; set; }
+        public DateTime DataInternacao { get; set; } = DateTime.UtcNow;
         public Acompanhante Acompanhante { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
 

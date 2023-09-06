@@ -10,7 +10,6 @@
         public string EnderecoAcompanhante { get; set; }
         public int NumeroAcompanhante { get; set; }
         public string GrauParentesco { get; set; }
-        public UsuarioAcesso UsuarioAcesso { get; set; }
 
         public Acompanhante()
         {

@@ -23,6 +23,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         public int Numero { get; set; }
         [Required(ErrorMessage = "O campo Motivo é obrigatório.")]
         public string MotivoInternacao { get; set; }
+        public DateTime DataInternacao { get; set; } = DateTime.UtcNow;
         public AcompanhanteViewModel Acompanhante { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
     }
