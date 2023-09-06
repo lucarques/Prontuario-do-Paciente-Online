@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     /// <inheritdoc />
-    public partial class primeiramigration : Migration
+    public partial class PrimeiraMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,6 +68,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     Endereco = table.Column<string>(type: "text", nullable: false),
                     Numero = table.Column<int>(type: "integer", nullable: false),
                     MotivoInternacao = table.Column<string>(type: "text", nullable: false),
+                    DataInternacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     AcompanhanteId = table.Column<int>(type: "integer", nullable: false),
                     StatusPaciente = table.Column<int>(type: "integer", nullable: true)
                 },

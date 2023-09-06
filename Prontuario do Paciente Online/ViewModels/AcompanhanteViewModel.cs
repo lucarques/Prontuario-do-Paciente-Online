@@ -20,7 +20,5 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         public int NumeroAcompanhante { get; set; }
         [Required(ErrorMessage = "O campo Grau de Parentesco é obrigatório.")]
         public string GrauParentesco { get; set; }
-        public UsuarioAcessoViewModel UsuarioAcesso { get; set; }
-
     }
 }

@@ -1,0 +1,76 @@
+﻿@using Prontuario_do_Paciente_Online.Models.Enums;
+@model Prontuario_do_Paciente_Online.ViewModels.CadastroAcessoViewModel;
+@{
+    ViewData["Title"] = "Cadastro de Usuário Interno";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .field-validation-error {
+        font-size: 11px;
+    }
+</style>
+
+<html>
+<head>
+</head>
+<body>
+    <main class="main-content mt-4">
+        <div class="card p-4">
+            <div class="tittle-text m-4">
+                <h3>@ViewData["Title"]</h3>
+            </div>
+            <div class="container-fluid">
+                <table class="table align-items-center mb0">
+                    <form asp-action="RegistrarUsuario" method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="form-control-label"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="Digite o e-mail" required>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Usuario" class="form-control-label"></label>
+                                    <input asp-for="Usuario" class="form-control" placeholder="Digite o nome de usuário" required>
+                                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Password" class="form-control-label"></label>
+                                    <input asp-for="Password" class="form-control" placeholder="Digite a senha" required>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword" class="form-control-label"></label>
+                                    <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Digite a senha novamente" required>
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Acesso</label>
+                                    <select asp-for="PermissaoNome" class="form-control">
+                                        <option value="" disabled selected>Selecione o tipo de acesso</option>
+                                        <option value="@EnumPermissoes.Administrativo">Administrativo</option>
+                                        <option value="@EnumPermissoes.Tecnologia">Tecnologia</option>
+                                        <option value="@EnumPermissoes.Medico">Medico</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-sm mt-3">Registrar</button>
+                        </div>
+                    </form>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
