@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Prontuario_do_Paciente_Online.Services;
 using Prontuario_do_Paciente_Online.ViewModels;
 
 namespace Prontuario_do_Paciente_Online.Controllers
@@ -18,10 +20,17 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            var users = userManager.Users;
+            var users = await userManager.Users.ToListAsync();
             return View(users);
+        }
+
+        [HttpGet]
+        public ActionResult Details(string email)
+        {
+            var user = userManager.FindByEmailAsync(email);
+            return View(user);
         }
 
         [HttpGet]
@@ -29,7 +38,6 @@ namespace Prontuario_do_Paciente_Online.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(CadastroAcessoViewModel model)
         {
@@ -58,7 +66,6 @@ namespace Prontuario_do_Paciente_Online.Controllers
             return View(model);
         }
 
-        //Função deleta usuários
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {

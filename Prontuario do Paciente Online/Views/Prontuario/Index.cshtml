@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Prontuario_do_Paciente_Online.Models.Paciente>
+@{
     ViewData["Title"] = "Prontuário do paciente";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -24,46 +25,75 @@
             background-color: #f2f2f2;
         }
     </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./lib/bootstrap/dist/js/bootstrap.js"></script>
+
 </head>
 <body>
     <h4>@ViewData["Title"]</h4>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Diagnóstico</th>
-                <th>Quarto</th>
-                <th>Médico Responsável</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>João Silva</td>
-                <td>45</td>
-                <td>Pneumonia</td>
-                <td>101</td>
-                <td>Dr. Maria</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href="#">Detalhes</a>
-                    <a class="btn btn-secondary btn-sm" href="#">Editar</a>
-                    <a class="btn btn-success btn-sm" href="#">Adicionar</a>
-                </td>
-            </tr>
-            <tr>
-                <td>Maria Santos</td>
-                <td>35</td>
-                <td>Fratura no tornozelo</td>
-                <td>102</td>
-                <td>Dr. Pedro</td>
-                <td>
-                    <a class="btn btn-default btn-sm" href="#">Detalhes</a>
-                    <a class="btn btn-secondary btn-sm" href="#">Editar</a>
-                    <a class="btn btn-success btn-sm" href="#">Adicionar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    @if (Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Data da internação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="my-auto">
+                            <h3 class="mb-0 text-xs"> @item.Id</h3>
+                        </td>
+                        <td class="my-auto">
+                            <h3 class="mb-0 text-xs"> @item.Nome</h3>
+                        </td>
+                        <td class="my-auto">
+                            <h3 class="mb-0 text-xs"> @item.Idade</h3>
+                        </td>
+                        <td class="my-auto">
+                            <h3 class="mb-0 text-xs"> @item.DataInternacao</h3>
+                        </td>
+                        <td>
+                            <a data-id="@item.Id" class="btn-inserir-prontuario btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalInserirProntuario">Adicionar</a>
+                            <a class="btn btn-default btn-sm disabled">Detalhes</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Não existem dados para serem exibidos</p>
+    }
+
+    <div id="_AdicionarProntuarioPaciente"></div>
+
+    <script>
+        document.querySelectorAll(".btn-inserir-prontuario").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var pacienteId = this.getAttribute("data-id");
+
+                $.ajax({
+                    url: "/prontuario/AdicionarProntuario?id=" + pacienteId,
+                    method: "GET",
+                    success: function (data) {
+                        $("#_AdicionarProntuarioPaciente").html(data);
+                        $("#modalInserirProntuario").modal('show');
+                    },
+                    error: function () {
+                        alert("Ocorreu um erro ao buscar os dados da consulta.");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

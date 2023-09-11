@@ -32,7 +32,6 @@ namespace Prontuario_do_Paciente_Online.Services
                 Endereco = paciente.Endereco,
                 Numero = paciente.Numero,
                 MotivoInternacao = paciente.MotivoInternacao,
-
                 Acompanhante = new AcompanhanteViewModel
                 {
                     NomeAcompanhante = paciente.Acompanhante.NomeAcompanhante,
@@ -92,7 +91,7 @@ namespace Prontuario_do_Paciente_Online.Services
 
         public void AtualizarDadosPaciente(PacientesViewModel model)
         {
-           try
+            try
             {
                 Paciente atualizaPaciente = new Paciente
                 {

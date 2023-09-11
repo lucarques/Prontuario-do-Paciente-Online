@@ -1,0 +1,64 @@
+﻿@model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
+
+<style>
+    .btn-gray-background {
+        background-color:gainsboro
+    }
+</style>
+
+<div id="modalInserirProntuario" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inserir Prontuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control btn-gray-background" id="nome" value="@Model.Nome" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idade" class="form-label">Idade:</label>
+                        <input type="text" class="form-control btn-gray-background" id="idade" value="@Model.Idade" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dataInternacao" class="form-label">Data da internação:</label>
+                        <input type="date" class="form-control btn-gray-background" id="dataInternacao" value="@Model.DataInternacao.ToString("yyyy-MM-dd")" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="medicoResponsavel" class="form-label">Médico Responsável:</label>
+                        <input type="text" class="form-control" id="medicoResponsavel">
+                    </div>
+                    <div class="mb-3">
+                        <label for="diagnostico" class="form-label">Diagnóstico:</label>
+                        <textarea class="form-control" id="diagnostico" rows="1"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status:</label>
+                        <select class="form-select" id="status">
+                            <option value="" disabled selected>Selecione um status</option>
+                            <option value="3">Estável</option>
+                            <option value="2">Crítico</option>
+                            <option value="1">Grave</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dataProntuario" class="form-label">Data do Prontuário:</label>
+                        <input type="date" class="form-control" id="dataProntuario">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avaliacaoMedico" class="form-label">Avaliação do Médico Responsável:</label>
+                        <textarea class="form-control" id="avaliacaoMedico" rows="4"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>

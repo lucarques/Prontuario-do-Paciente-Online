@@ -29,8 +29,8 @@ namespace Prontuario_do_Paciente_Online.Controllers
 
         public ActionResult Details(int id)
         {
-            var list = _pacienteService.ObterDetalhes(id);
-            return View(list);
+            var dados = _pacienteService.ObterDetalhes(id);
+            return View(dados);
         }
 
         public ActionResult Create()
@@ -75,7 +75,6 @@ namespace Prontuario_do_Paciente_Online.Controllers
                 return View(model);
             }
         }
-
 
         public ActionResult Edit(int id)
         {
