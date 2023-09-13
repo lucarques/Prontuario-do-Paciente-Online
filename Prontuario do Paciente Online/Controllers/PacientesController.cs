@@ -29,8 +29,8 @@ namespace Prontuario_do_Paciente_Online.Controllers
 
         public ActionResult Details(int id)
         {
-            var list = _pacienteService.ObterDetalhes(id);
-            return View(list);
+            var dados = _pacienteService.ObterDetalhes(id);
+            return View(dados);
         }
 
         public ActionResult Create()
@@ -76,18 +76,19 @@ namespace Prontuario_do_Paciente_Online.Controllers
             }
         }
 
-
         public ActionResult Edit(int id)
         {
-            return View();
+            var dados = _pacienteService.ObterDetalhes(id);
+            return View(dados);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(PacientesViewModel model)
         {
             try
             {
+                _pacienteService.AtualizarDadosPaciente(model);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -32,7 +32,6 @@ namespace Prontuario_do_Paciente_Online.Services
                 Endereco = paciente.Endereco,
                 Numero = paciente.Numero,
                 MotivoInternacao = paciente.MotivoInternacao,
-
                 Acompanhante = new AcompanhanteViewModel
                 {
                     NomeAcompanhante = paciente.Acompanhante.NomeAcompanhante,
@@ -75,6 +74,38 @@ namespace Prontuario_do_Paciente_Online.Services
                 };
 
                 _context.Paciente.Add(novoPaciente);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine("Detalhes da exceção interna: " + ex.InnerException.Message);
+                }
+                else
+                {
+                    Console.WriteLine("Erro genérico: " + ex.Message);
+                }
+            }
+        }
+
+        public void AtualizarDadosPaciente(PacientesViewModel model)
+        {
+            try
+            {
+                Paciente atualizaPaciente = new Paciente
+                {
+                    Nome = model.Nome,
+                    Idade = model.Idade,
+                    Cpf = model.Cpf,
+                    Acompanhante = new Acompanhante
+                    {
+                        NomeAcompanhante = model.Acompanhante.NomeAcompanhante,
+                        CpfAcompanhante = model.Acompanhante.CpfAcompanhante
+                    }
+                };
+
+                _context.Paciente.Add(atualizaPaciente);
                 _context.SaveChanges();
             }
             catch (Exception ex)

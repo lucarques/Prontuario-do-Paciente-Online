@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Prontuario\_AdicionarProntuario.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\assets\css\argon-dashboard.css" />
     <None Include="wwwroot\assets\css\argon-dashboard.css.map" />
     <None Include="wwwroot\assets\css\argon-dashboard.min.css" />

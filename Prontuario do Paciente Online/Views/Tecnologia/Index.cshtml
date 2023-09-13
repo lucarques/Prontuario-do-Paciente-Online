@@ -1,8 +1,51 @@
-﻿@model Prontuario_do_Paciente_Online.ViewModels.CadastroAcessoViewModel;
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityUser>
 
 @{
     ViewData["Title"] = "Cadastro de Usuário Interno";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Listagem de usuarios internos</h1>
+
+<body>
+    <div class="main-content mt-4">
+        <div class="card p-4">
+            <div class="title-text m-4">
+                @*<h2>@ViewData["Title"]</h2>*@
+            </div>
+            <div class="table-responsive">
+                @if (Model.Any())
+                {
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="my-auto">
+                                        <h3 class="mb-0 text-xs"> @item.Id</h3>
+                                    </td>
+                                    <td class="my-auto">
+                                        <h3 class="mb-0 text-xs"> @item.Email</h3>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="pacientes" asp-action="details" asp-route-id="@item.Email" class="btn btn-default btn-sm">Detalhes</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Não existe dados para serem exibidos</p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
