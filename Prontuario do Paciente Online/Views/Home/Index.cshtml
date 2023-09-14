@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
-@inject UserManager<IdentityUser> UserManager 
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,182 +10,191 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<body>
-    <main class="main-content mt-4 d-flex">
-        <div class="card ">
-            <div class="tittle-text m-4">
-                <h3>RESUMO DE PACIENTES</h3>
+@if (!User.IsInRole("Acompanhante"))
+{
+    <body>
+       <main class="main-content mt-4 d-flex">
+         <div class="row">
+            <div class="card col-md-8 ">
+                <div class="tittle-text m-4">
+                    <h3>RESUMO DE PACIENTES</h3>
+                </div>
+
+                <div class="table-responsive w-100 mb-4 ">
+                    <div class="d-flex">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Motivo Internação</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cid</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data internação</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">João Moura</h6>
+                                                <p class="text-xs text-secondary mb-0  mt-1">ALA: 09</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Suspeita de infarto do miocárdio</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <p class="text-xs font-weight-bold mb-0"> Z03.4</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">14/08/2023</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill bg-gradient-warning">Estável</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">Larissa Reis</h6>
+                                                <p class="text-xs text-secondary mb-0  mt-1">ALA: 10</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Neoplasia maligna</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Z03.1</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">16/08/2023</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill bg-gradient-danger">Grave</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">Rogério Araujo</h6>
+                                                <p class="text-xs text-secondary mb-0  mt-1">ALA: 08</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Doença ou afecção não especificada</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Z03.9</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">19/08/2023</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill bg-gradient-warning">Estável</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">Isabela Santos Rodrigues</h6>
+                                                <p class="text-xs text-secondary mb-0 mt-1">ALA: 09</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Suspeita de tuberculose</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Z03.0</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">20/08/2023</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill bg-gradient-danger">Grave</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">Guilherme Oliveira Souza</h6>
+                                                <p class="text-xs text-secondary mb-0  mt-1">ALA: 08</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Transtornos mentais e do comportamento</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Z03.2</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">21/08/2023</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill bg-gradient-danger">Grave</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">Emilly Pereira Dias</h6>
+                                                <p class="text-xs text-secondary mb-0  mt-1">ALA: 10</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Suspeita de efeito tóxico de substância ingerida</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Z03.6</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">23/08/2023</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill bg-gradient-warning">Estável</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                     </div>
             </div>
 
-            <div class="table-responsive w-100">
-                <div class="d-flex">
-                <table class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Motivo Internação</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cid</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data internação</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">João Moura</h6>
-                                        <p class="text-xs text-secondary mb-0  mt-1">ALA: 09</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">Suspeita de infarto do miocárdio</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <p class="text-xs font-weight-bold mb-0"> Z03.4</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">14/08/2023</span>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-pill bg-gradient-warning">Estável</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">                              
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">Larissa Reis</h6>
-                                        <p class="text-xs text-secondary mb-0  mt-1">ALA: 10</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">Neoplasia maligna</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <p class="text-xs font-weight-bold mb-0">Z03.1</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">16/08/2023</span>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-pill bg-gradient-danger">Grave</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">Rogério Araujo</h6>
-                                        <p class="text-xs text-secondary mb-0  mt-1">ALA: 08</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">Doença ou afecção não especificada</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <p class="text-xs font-weight-bold mb-0">Z03.9</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">19/08/2023</span>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-pill bg-gradient-warning">Estável</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">Isabela Santos Rodrigues</h6>
-                                        <p class="text-xs text-secondary mb-0 mt-1">ALA: 09</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">Suspeita de tuberculose</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <p class="text-xs font-weight-bold mb-0">Z03.0</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">20/08/2023</span>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-pill bg-gradient-danger">Grave</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">Guilherme Oliveira Souza</h6>
-                                        <p class="text-xs text-secondary mb-0  mt-1">ALA: 08</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">Transtornos mentais e do comportamento</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <p class="text-xs font-weight-bold mb-0">Z03.2</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">21/08/2023</span>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-pill bg-gradient-danger">Grave</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">Emilly Pereira Dias</h6>
-                                        <p class="text-xs text-secondary mb-0  mt-1">ALA: 10</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">Suspeita de efeito tóxico de substância ingerida</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <p class="text-xs font-weight-bold mb-0">Z03.6</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">23/08/2023</span>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-pill bg-gradient-warning">Estável</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                    </table>
-                    <div class="d-flex">
-                        <div class="card ">
-                            <div class="card-body">
-                                <p>Quantidade Pacientes por Status</p>
-                                <div class="chart">
-                                    <canvas id="pie-chart" class="chart-canvas" height="300"></canvas>
-                                </div>
-                            </div>
+                <div class="card col-md-4 p-5 w-26">
+                    <div class="card-body">
+                        <p>Quantidade Pacientes por Status</p>
+                        <div class="chart">
+                            <canvas id="pie-chart" class="chart-canvas" height="300"></canvas>
                         </div>
                     </div>
-                
                 </div>
-                
-            </div>
-        </div>
-    </main>
-</body>
+
+         </div>      
+       
+     </main>
+    </body>
+}
+else
+{
+    <p>Dashboard do Acompanhante</p>
+}
+
 </html>
 
 <script src="../../assets/js/plugins/chartjs.min.js"></script>
