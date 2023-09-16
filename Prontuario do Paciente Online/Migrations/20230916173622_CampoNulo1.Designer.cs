@@ -12,8 +12,8 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230914004020_AtualizaCamposCorrige")]
-    partial class AtualizaCamposCorrige
+    [Migration("20230916173622_CampoNulo1")]
+    partial class CampoNulo1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

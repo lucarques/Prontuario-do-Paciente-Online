@@ -20,7 +20,7 @@ namespace Prontuario_do_Paciente_Online.Services
         public PacientesViewModel ObterPorPacienteId(int id)
         {
             var paciente = _context.Paciente.FirstOrDefault(x => x.Id == id);
-            
+
             var viewModel = new PacientesViewModel
             {
                 Nome = paciente!.Nome,
@@ -31,7 +31,7 @@ namespace Prontuario_do_Paciente_Online.Services
                 Endereco = paciente.Endereco,
                 Numero = paciente.Numero,
                 MotivoInternacao = paciente.MotivoInternacao,
-                DataInternacao = paciente.DataInternacao
+                DataInternacao = paciente.DataInternacao,
             };
             return viewModel;
         }

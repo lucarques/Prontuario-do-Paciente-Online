@@ -24,9 +24,6 @@ namespace Prontuario_do_Paciente_Online.ViewModels
 
         [Required]
         public string? PermissaoNome { get; set; }
-        
-        [Display(Name ="Nome do médico")]
-        public Medico Medico { get; set; }
 
     }
 }

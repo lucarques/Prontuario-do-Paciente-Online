@@ -7,11 +7,30 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityMigration : Migration
+    public partial class ProntuarioInseriSistema2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Acompanhante",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NomeAcompanhante = table.Column<string>(type: "text", nullable: false),
+                    CpfAcompanhante = table.Column<string>(type: "text", nullable: false),
+                    EstadoAcompanhante = table.Column<string>(type: "text", nullable: false),
+                    CidadeAcompanhante = table.Column<string>(type: "text", nullable: false),
+                    EnderecoAcompanhante = table.Column<string>(type: "text", nullable: false),
+                    NumeroAcompanhante = table.Column<int>(type: "integer", nullable: false),
+                    GrauParentesco = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Acompanhante", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -49,6 +68,20 @@ namespace Prontuario_do_Paciente_Online.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medico",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    Crm = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medico", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,6 +190,67 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Prontuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Diagnostico = table.Column<string>(type: "text", nullable: false),
+                    Quarto = table.Column<int>(type: "integer", nullable: false),
+                    Observacao = table.Column<string>(type: "text", nullable: false),
+                    DataProntuario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    MedicoId = table.Column<int>(type: "integer", nullable: false),
+                    EnumStatus = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prontuario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Prontuario_Medico_MedicoId",
+                        column: x => x.MedicoId,
+                        principalTable: "Medico",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Paciente",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    Idade = table.Column<int>(type: "integer", nullable: false),
+                    Cpf = table.Column<string>(type: "text", nullable: false),
+                    Estado = table.Column<string>(type: "text", nullable: false),
+                    Cidade = table.Column<string>(type: "text", nullable: false),
+                    Endereco = table.Column<string>(type: "text", nullable: false),
+                    Numero = table.Column<int>(type: "integer", nullable: false),
+                    Cid = table.Column<string>(type: "text", nullable: true),
+                    MotivoInternacao = table.Column<string>(type: "text", nullable: false),
+                    DataInternacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    AcompanhanteId = table.Column<int>(type: "integer", nullable: false),
+                    ProntuarioId = table.Column<int>(type: "integer", nullable: false),
+                    StatusPaciente = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Paciente", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Paciente_Acompanhante_AcompanhanteId",
+                        column: x => x.AcompanhanteId,
+                        principalTable: "Acompanhante",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Paciente_Prontuario_ProntuarioId",
+                        column: x => x.ProntuarioId,
+                        principalTable: "Prontuario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -193,6 +287,21 @@ namespace Prontuario_do_Paciente_Online.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Paciente_AcompanhanteId",
+                table: "Paciente",
+                column: "AcompanhanteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Paciente_ProntuarioId",
+                table: "Paciente",
+                column: "ProntuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prontuario_MedicoId",
+                table: "Prontuario",
+                column: "MedicoId");
         }
 
         /// <inheritdoc />
@@ -214,10 +323,22 @@ namespace Prontuario_do_Paciente_Online.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Paciente");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Acompanhante");
+
+            migrationBuilder.DropTable(
+                name: "Prontuario");
+
+            migrationBuilder.DropTable(
+                name: "Medico");
         }
     }
 }

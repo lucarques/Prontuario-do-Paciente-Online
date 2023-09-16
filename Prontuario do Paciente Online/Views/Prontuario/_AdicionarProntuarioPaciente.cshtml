@@ -4,6 +4,7 @@
     .btn-gray-background {
         background-color:gainsboro
     }
+
 </style>
 
 <div id="modalInserirProntuario" class="modal" tabindex="-1">
@@ -15,22 +16,43 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control btn-gray-background" id="nome" value="@Model.Nome" disabled>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control btn-gray-background" id="nome" value="@Model.Nome" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="idade" class="form-label">Idade:</label>
+                                <input type="text" class="form-control btn-gray-background" id="idade" value="@Model.Idade" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="dataInternacao" class="form-label">Data da internação:</label>
+                                <input type="date" class="form-control btn-gray-background" id="dataInternacao" value="@Model.DataInternacao.ToString("yyyy-MM-dd")" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="medicoResponsavel" class="form-label">Médico Responsável:</label>
+                                <input type="text" class="form-control" id="medicoResponsavel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="crmMedico" class="form-label">CRM:</label>
+                            <input type="text" class="form-control" id="crmMedico">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="idade" class="form-label">Idade:</label>
-                        <input type="text" class="form-control btn-gray-background" id="idade" value="@Model.Idade" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="dataInternacao" class="form-label">Data da internação:</label>
-                        <input type="date" class="form-control btn-gray-background" id="dataInternacao" value="@Model.DataInternacao.ToString("yyyy-MM-dd")" disabled>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="medicoResponsavel" class="form-label">Médico Responsável:</label>
-                        <input type="text" class="form-control" id="medicoResponsavel">
+                        <label for="dataProntuario" class="form-label">Data do Prontuario:</label>
+                        <input type="date" class="form-control btn-gray-background" id="dataProntuario" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="diagnostico" class="form-label">Diagnóstico:</label>
@@ -52,9 +74,18 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" location. reload() >Fechar</button>
                 <button type="button" class="btn btn-success">Adicionar</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var dataAtual = new Date().toISOString().split('T')[0];
+    document.getElementById("dataProntuario").value = dataAtual;
+
+    //pré-preenchido campo medico responsavel:
+    var prefixo = "Dr(a). ";
+    var medicoResponsavelInput = document.getElementById("medicoResponsavel");
+    medicoResponsavelInput.value = prefixo;
+</script>

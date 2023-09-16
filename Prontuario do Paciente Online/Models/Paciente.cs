@@ -19,13 +19,14 @@ namespace Prontuario_do_Paciente_Online.Models
         public string MotivoInternacao { get; set; }
         public DateTime DataInternacao { get; set; } = DateTime.UtcNow;
         public Acompanhante Acompanhante { get; set; }
+        public Prontuario? Prontuario { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
 
         public Paciente()
         {
         }
 
-        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string? cid, string motivoInternacao, DateTime dataInternacao, Acompanhante acompanhante, EnumStatus? statusPaciente)
+        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string? cid, string motivoInternacao, DateTime dataInternacao, Acompanhante acompanhante, Prontuario prontuario, EnumStatus? statusPaciente)
         {
             Id = id;
             Nome = nome;
@@ -39,6 +40,7 @@ namespace Prontuario_do_Paciente_Online.Models
             MotivoInternacao = motivoInternacao;
             DataInternacao = dataInternacao;
             Acompanhante = acompanhante;
+            Prontuario = prontuario;
             StatusPaciente = statusPaciente;
         }
     }

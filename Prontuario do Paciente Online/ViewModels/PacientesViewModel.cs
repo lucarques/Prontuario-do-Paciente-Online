@@ -26,6 +26,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         public DateTime DataInternacao { get; set; } = DateTime.UtcNow;
         public string? Cid { get; set; }
         public AcompanhanteViewModel Acompanhante { get; set; }
+        public ProntuarioViewModel? Prontuario { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
         public CadastroAcessoViewModel CadastroAcesso { get; set; }
     }

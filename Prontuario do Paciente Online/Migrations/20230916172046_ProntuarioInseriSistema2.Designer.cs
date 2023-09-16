@@ -12,8 +12,8 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230914004241_AtualizaCamposCorrige2")]
-    partial class AtualizaCamposCorrige2
+    [Migration("20230916172046_ProntuarioInseriSistema2")]
+    partial class ProntuarioInseriSistema2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -329,7 +329,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProntuarioId")
+                    b.Property<int>("ProntuarioId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("StatusPaciente")
@@ -440,7 +440,9 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     b.HasOne("Prontuario_do_Paciente_Online.Models.Prontuario", "Prontuario")
                         .WithMany()
-                        .HasForeignKey("ProntuarioId");
+                        .HasForeignKey("ProntuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Acompanhante");
 
