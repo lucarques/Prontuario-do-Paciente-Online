@@ -15,6 +15,7 @@ namespace Prontuario_do_Paciente_Online.Models
         public string Cidade { get; set; }
         public string Endereco { get; set; }
         public int Numero { get; set; }
+        public string? Cid { get; set; }
         public string MotivoInternacao { get; set; }
         public DateTime DataInternacao { get; set; } = DateTime.UtcNow;
         public Acompanhante Acompanhante { get; set; }
@@ -24,7 +25,7 @@ namespace Prontuario_do_Paciente_Online.Models
         {
         }
 
-        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string motivoInternacao, Acompanhante acompanhante, EnumStatus statusPaciente)
+        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string? cid, string motivoInternacao, DateTime dataInternacao, Acompanhante acompanhante, EnumStatus? statusPaciente)
         {
             Id = id;
             Nome = nome;
@@ -34,7 +35,9 @@ namespace Prontuario_do_Paciente_Online.Models
             Cidade = cidade;
             Endereco = endereco;
             Numero = numero;
+            Cid = cid;
             MotivoInternacao = motivoInternacao;
+            DataInternacao = dataInternacao;
             Acompanhante = acompanhante;
             StatusPaciente = statusPaciente;
         }

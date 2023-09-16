@@ -8,15 +8,15 @@ namespace Prontuario_do_Paciente_Online.Models
         public string Diagnostico { get; set; }
         public int Quarto { get; set; }
         public string Observacao { get; set; }
+        public DateTime DataProntuario { get; set; }= DateTime.Now;
         public Medico Medico { get; set; }
-        public Paciente Paciente { get; set; }
         public EnumStatus EnumStatus { get; set; }
 
         public Prontuario()
         {
         }
 
-        public Prontuario(int id, string diagnostico, int quarto, string observacao, Medico medico, EnumStatus enumStatus, Paciente paciente)
+        public Prontuario(int id, string diagnostico, int quarto, string observacao, Medico medico, EnumStatus enumStatus)
         {
             Id = id;
             Diagnostico = diagnostico;
@@ -24,7 +24,6 @@ namespace Prontuario_do_Paciente_Online.Models
             Observacao = observacao;
             Medico = medico;
             EnumStatus = enumStatus;
-            Paciente = paciente;
         }
     }
 }

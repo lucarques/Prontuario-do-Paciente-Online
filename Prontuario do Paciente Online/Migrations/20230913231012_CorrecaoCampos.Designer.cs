@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Prontuario_do_Paciente_Online.Models;
@@ -11,9 +12,11 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230913231012_CorrecaoCampos")]
+    partial class CorrecaoCampos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,27 +261,6 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.ToTable("Acompanhante");
                 });
 
-            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Medico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Crm")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medico");
-                });
-
             modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Paciente", b =>
                 {
                     b.Property<int>("Id")
@@ -326,9 +308,6 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProntuarioId")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("StatusPaciente")
                         .HasColumnType("integer");
 
@@ -336,44 +315,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     b.HasIndex("AcompanhanteId");
 
-                    b.HasIndex("ProntuarioId");
-
                     b.ToTable("Paciente");
-                });
-
-            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Prontuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataProntuario")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Diagnostico")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("EnumStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MedicoId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Observacao")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Quarto")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MedicoId");
-
-                    b.ToTable("Prontuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -435,24 +377,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Prontuario_do_Paciente_Online.Models.Prontuario", "Prontuario")
-                        .WithMany()
-                        .HasForeignKey("ProntuarioId");
-
                     b.Navigation("Acompanhante");
-
-                    b.Navigation("Prontuario");
-                });
-
-            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Prontuario", b =>
-                {
-                    b.HasOne("Prontuario_do_Paciente_Online.Models.Medico", "Medico")
-                        .WithMany()
-                        .HasForeignKey("MedicoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Medico");
                 });
 #pragma warning restore 612, 618
         }

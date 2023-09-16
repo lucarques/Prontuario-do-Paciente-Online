@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Prontuario_do_Paciente_Online.Models;
@@ -11,9 +12,11 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230914003655_AtualizaCampos")]
+    partial class AtualizaCampos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,7 +329,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProntuarioId")
+                    b.Property<int>("ProntuarioId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("StatusPaciente")
@@ -437,7 +440,9 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     b.HasOne("Prontuario_do_Paciente_Online.Models.Prontuario", "Prontuario")
                         .WithMany()
-                        .HasForeignKey("ProntuarioId");
+                        .HasForeignKey("ProntuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Acompanhante");
 

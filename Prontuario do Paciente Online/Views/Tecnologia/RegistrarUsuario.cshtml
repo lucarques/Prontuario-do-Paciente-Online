@@ -57,12 +57,28 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Acesso</label>
-                                    <select asp-for="PermissaoNome" class="form-control">
+                                    <select asp-for="PermissaoNome" id="campo-acesso" class="form-control" onchange="validaCampoMedico()">
                                         <option value="" disabled selected>Selecione o tipo de acesso</option>
                                         <option value="@EnumPermissoes.Administrativo">Administrativo</option>
                                         <option value="@EnumPermissoes.Tecnologia">Tecnologia</option>
-                                        <option value="@EnumPermissoes.Medico">Medico</option>
+                                        <option value="@EnumPermissoes.Medico">Médico</option>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="campo-medico" class="row" hidden>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Medico.Nome" class="form-control-label"></label>
+                                    <input asp-for="Medico.Nome" class="form-control" placeholder="Digite o nome do médico" required>
+                                    <span asp-validation-for="Medico.Nome" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Medico.Crm" class="form-control-label"></label>
+                                    <input asp-for="Medico.Crm" class="form-control" placeholder="Digite o nome de usuário" required>
+                                    <span asp-validation-for="Medico.Crm" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -76,3 +92,5 @@
     </main>
 </body>
 </html>
+
+<script src="~/js/site.js"></script>

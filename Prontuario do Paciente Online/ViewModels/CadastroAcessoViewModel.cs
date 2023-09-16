@@ -1,4 +1,5 @@
-﻿using Prontuario_do_Paciente_Online.Models.Enums;
+﻿using Prontuario_do_Paciente_Online.Models;
+using Prontuario_do_Paciente_Online.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Prontuario_do_Paciente_Online.ViewModels
@@ -23,6 +24,9 @@ namespace Prontuario_do_Paciente_Online.ViewModels
 
         [Required]
         public string? PermissaoNome { get; set; }
+        
+        [Display(Name ="Nome do médico")]
+        public Medico Medico { get; set; }
 
     }
 }
