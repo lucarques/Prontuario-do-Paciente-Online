@@ -5,7 +5,7 @@
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     /// <inheritdoc />
-    public partial class CampoNulo1 : Migration
+    public partial class DesfazCamposNulos : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

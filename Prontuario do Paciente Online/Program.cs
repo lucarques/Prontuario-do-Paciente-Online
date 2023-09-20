@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<ProntuarioService>();
+builder.Services.AddScoped<TecnologiaService>();
 
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(options => 

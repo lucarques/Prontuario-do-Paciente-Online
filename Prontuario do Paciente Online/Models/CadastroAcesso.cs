@@ -15,17 +15,20 @@ namespace Prontuario_do_Paciente_Online.Models
 
         public string PermissaoNome { get; set; }
 
+        public Medico? Medico { get; set; }
+
         public CadastroAcesso()
         {
         }
 
-        public CadastroAcesso(string email, string usuario, string password, string confirmPassword, string permissaoNome)
+        public CadastroAcesso(string email, string usuario, string password, string confirmPassword, string permissaoNome, Medico? medico)
         {
             Email = email;
             Usuario = usuario;
             Password = password;
             ConfirmPassword = confirmPassword;
             PermissaoNome = permissaoNome;
+            Medico = medico;
         }
     }
 }

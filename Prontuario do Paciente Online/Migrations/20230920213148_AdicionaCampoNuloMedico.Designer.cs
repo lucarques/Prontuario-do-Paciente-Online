@@ -12,8 +12,8 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230916173622_CampoNulo1")]
-    partial class CampoNulo1
+    [Migration("20230920213148_AdicionaCampoNuloMedico")]
+    partial class AdicionaCampoNuloMedico
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -329,17 +329,12 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProntuarioId")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("StatusPaciente")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AcompanhanteId");
-
-                    b.HasIndex("ProntuarioId");
 
                     b.ToTable("Paciente");
                 });
@@ -351,6 +346,10 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvaliacaoMedico")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("DataProntuario")
                         .HasColumnType("timestamp with time zone");
@@ -365,9 +364,8 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("MedicoId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Observacao")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("PacienteId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Quarto")
                         .HasColumnType("integer");
@@ -375,6 +373,8 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MedicoId");
+
+                    b.HasIndex("PacienteId");
 
                     b.ToTable("Prontuario");
                 });
@@ -438,13 +438,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Prontuario_do_Paciente_Online.Models.Prontuario", "Prontuario")
-                        .WithMany()
-                        .HasForeignKey("ProntuarioId");
-
                     b.Navigation("Acompanhante");
-
-                    b.Navigation("Prontuario");
                 });
 
             modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Prontuario", b =>
@@ -455,7 +449,15 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Prontuario_do_Paciente_Online.Models.Paciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Medico");
+
+                    b.Navigation("Paciente");
                 });
 #pragma warning restore 612, 618
         }

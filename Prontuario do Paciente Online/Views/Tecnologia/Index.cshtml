@@ -11,7 +11,6 @@
     <div class="main-content mt-4">
         <div class="card p-4">
             <div class="title-text m-4">
-                @*<h2>@ViewData["Title"]</h2>*@
             </div>
             <div class="table-responsive">
                 @if (Model.Any())
@@ -21,6 +20,7 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">E-mail</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +34,7 @@
                                         <h3 class="mb-0 text-xs"> @item.Email</h3>
                                     </td>
                                     <td>
-                                        <a asp-controller="pacientes" asp-action="details" asp-route-id="@item.Email" class="btn btn-default btn-sm">Detalhes</a>
+                                        <a asp-controller="tecnologia" asp-action="details" asp-route-id="@item.Email" class="btn btn-default btn-sm ">Detalhes </a>
                                     </td>
                                 </tr>
                             }

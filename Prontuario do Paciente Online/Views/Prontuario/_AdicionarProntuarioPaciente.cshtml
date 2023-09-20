@@ -1,11 +1,12 @@
-﻿@model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
+﻿@model Prontuario_do_Paciente_Online.ViewModels.ProntuarioViewModel;
 
 <style>
     .btn-gray-background {
-        background-color:gainsboro
+        background-color: gainsboro
     }
 
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div id="modalInserirProntuario" class="modal" tabindex="-1">
     <div class="modal-dialog">
@@ -15,52 +16,45 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                <form asp-action="InserirProntuario" method="POST">
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label for="nome" class="form-label">Nome:</label>
-                                <input type="text" class="form-control btn-gray-background" id="nome" value="@Model.Nome" disabled>
+                                <input type="text" class="form-control btn-gray-background" id="nome" name="Paciente" value="@Model.Paciente.Nome">
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="idade" class="form-label">Idade:</label>
-                                <input type="text" class="form-control btn-gray-background" id="idade" value="@Model.Idade" disabled>
+                            <div class="col-md-6">
+                                <label for="dataInternacao" class="form-label">Data de internação:</label>
+                                <input type="date" class="form-control btn-gray-background" id="dataInternacao" value="@Model.Paciente.DataInternacao.ToString("yyyy-MM-dd")" disabled>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="dataInternacao" class="form-label">Data da internação:</label>
-                                <input type="date" class="form-control btn-gray-background" id="dataInternacao" value="@Model.DataInternacao.ToString("yyyy-MM-dd")" disabled>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="dataProntuario" class="form-label">Data do Prontuário:</label>
+                                <input type="date" class="form-control btn-gray-background" id="dataProntuario" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-label">Ala do paciente:</label>
+                                <input asp-for="Quarto" name="Quarto"class="form-control">
+                                <span asp-validation-for="Quarto" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <label for="medicoResponsavel" class="form-label">Médico Responsável:</label>
-                                <input type="text" class="form-control" id="medicoResponsavel">
+                                <select class="form-select" id="medicoResponsavel" name="Medico" required>
+                                    <option value="" selected>Selecione o seu cadastro</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="mb-3">
-                            <label for="crmMedico" class="form-label">CRM:</label>
-                            <input type="text" class="form-control" id="crmMedico">
-                        </div>
-                    </div>
                     <div class="mb-3">
-                        <label for="dataProntuario" class="form-label">Data do Prontuario:</label>
-                        <input type="date" class="form-control btn-gray-background" id="dataProntuario" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="diagnostico" class="form-label">Diagnóstico:</label>
-                        <textarea class="form-control" id="diagnostico" rows="1"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status:</label>
-                        <select class="form-select" id="status">
+                        <label class="form-control-label">Status:</label>
+                        <select class="form-control" name="EnumStatus" required>
                             <option value="" disabled selected>Selecione um status</option>
                             <option value="3">Estável</option>
                             <option value="2">Crítico</option>
@@ -68,24 +62,58 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="avaliacaoMedico" class="form-label">Avaliação do Médico Responsável:</label>
-                        <textarea class="form-control" id="avaliacaoMedico" rows="4"></textarea>
+                        <label for="diagnostico" class="form-label">Diagnóstico:</label>
+                        <textarea id="diagnostico" name="Diagnostico" class="form-control" rows="1" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="avaliacao-medico" class="form-label">Avaliação do Médico Responsável:</label>
+                        <textarea id="avaliacao-medico" name="AvaliacaoMedico" class="form-control" rows="4" required></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Index", "Prontuario")" type="button" class="btn btn-secondary">Fechar</a>
+                        <button type="submit" class="btn btn-success">Adicionar</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" location. reload() >Fechar</button>
-                <button type="button" class="btn btn-success">Adicionar</button>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     var dataAtual = new Date().toISOString().split('T')[0];
     document.getElementById("dataProntuario").value = dataAtual;
 
-    //pré-preenchido campo medico responsavel:
-    var prefixo = "Dr(a). ";
-    var medicoResponsavelInput = document.getElementById("medicoResponsavel");
-    medicoResponsavelInput.value = prefixo;
+    //carregar drop-down
+    $(document).ready(function () {
+        $("#medicoResponsavel").click(function () {
+            if ($(this).children().length <= 1) {
+                $.ajax({
+                    url: "/Prontuario/ObterTodosMedicos",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (medicos) {
+                        let dropdown = $("#medicoResponsavel");
+                        dropdown.empty();
+
+                        dropdown.append($('<option>', {
+                            value: "",
+                            text: "Selecione o seu cadastro"
+                        }));
+
+                        $.each(medicos, function (i, medico) {
+                            debugger;
+                            dropdown.append($('<option>', {
+                                value: medico.id,
+                                text: "(" + medico.crm + ") Dr(a). " + medico.nome
+                            }));
+                        });
+                        dropdown.show();
+                    }
+                });
+            }
+        });
+    });
+
+
 </script>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Prontuario_do_Paciente_Online.Services;
+using Prontuario_do_Paciente_Online.ViewModels;
 
 namespace Prontuario_do_Paciente_Online.Controllers
 {
@@ -23,10 +24,40 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
+        public ActionResult ObterTodosMedicos()
+        {
+            var list = _prontuarioService.ObterTodosMedicos();
+            return Json(list);
+        }
+
+        [HttpGet]
         public ActionResult AdicionarProntuario(int id)
         {
-            var dados = _prontuarioService.ObterPorPacienteId(id);
-            return PartialView("_AdicionarProntuarioPaciente",dados);
+            var dados = _prontuarioService.ObterDadosIniciaisProntuarioPorPaciente(id);
+            if (ModelState.IsValid)
+            {
+                return PartialView("_AdicionarProntuarioPaciente", dados);
+            }
+            return View(dados);
         }
+
+        [HttpPost]
+        public ActionResult InserirProntuario(ProntuarioViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _prontuarioService.InserirProntuario(model);
+                    return RedirectToAction("Sucesso");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Ocorreu um erro ao inserir o prontuário: " + ex.Message);
+                }
+            }
+            return View(model);
+        }
+
     }
 }

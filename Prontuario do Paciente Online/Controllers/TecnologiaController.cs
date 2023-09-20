@@ -8,15 +8,18 @@ namespace Prontuario_do_Paciente_Online.Controllers
 {
     public class TecnologiaController : Controller
     {
+        private readonly TecnologiaService _tecnologiaService;
+
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public TecnologiaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public TecnologiaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, TecnologiaService tecnologiaService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            _tecnologiaService = tecnologiaService;
         }
 
         [HttpGet]
@@ -38,30 +41,40 @@ namespace Prontuario_do_Paciente_Online.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(CadastroAcessoViewModel model)
         {
-            if (ModelState.IsValid)
+            var user = new IdentityUser
             {
-                var user = new IdentityUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email
-                };
+                UserName = model.Email,
+                Email = model.Email
+            };
 
-                var result = await userManager.CreateAsync(user, model.Password);
+            if (model.Medico.Nome != null)
+            {
+                try
+                {
+                    _tecnologiaService.CadastroNovoMedico(model);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ocorreu uma exceção durante o cadastro do médico: {ex.Message}");
+                }
+            }
 
-                if (result.Succeeded)
-                {
-                    var role = await roleManager.FindByNameAsync(model.PermissaoNome);
-                    if(role != null)
-                        await userManager.AddToRoleAsync(user, role.Name);
-                    return RedirectToAction("Index", "Home");
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                var role = await roleManager.FindByNameAsync(model.PermissaoNome);
+                if (role != null)
+                    await userManager.AddToRoleAsync(user, role.Name);
+                return RedirectToAction("Index", "Home");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
             }
             return View(model);
         }

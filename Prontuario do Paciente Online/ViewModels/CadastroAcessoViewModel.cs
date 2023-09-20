@@ -25,5 +25,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         [Required]
         public string? PermissaoNome { get; set; }
 
+        public MedicoViewModel? Medico { get; set; }
+
     }
 }
