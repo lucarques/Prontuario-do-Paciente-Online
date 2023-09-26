@@ -70,12 +70,8 @@
     </div>
 </body>
 
-
-
-
 <script>
     $(document).ready(function () {
-        debugger;
         $("#filtroTipoAcesso").change(function () {
             var selectedTipoAcesso = $(this).val();
             var url = "/Tecnologia/ObterPorTipoAcesso?tipoAcesso=" + selectedTipoAcesso;
@@ -88,7 +84,7 @@
                         tableBody.append(newRow);
                     });
                 } else {
-                    var errorRow = "<tr><td colspan='2'>Dados não disponíveis</td></tr>";
+                    var errorRow = "<tr><td colspan='2'>Não existe dados para serem exibidos</td></tr>";
                     tableBody.append(errorRow);
                 }
             });

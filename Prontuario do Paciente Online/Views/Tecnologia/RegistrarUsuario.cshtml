@@ -1,4 +1,5 @@
-﻿@model Prontuario_do_Paciente_Online.ViewModels.CadastroAcessoViewModel;
+﻿@using Prontuario_do_Paciente_Online.Models.Enums;
+@model Prontuario_do_Paciente_Online.ViewModels.CadastroAcessoViewModel;
 
 @{
     ViewData["Title"] = "Cadastro de Usuário Interno";
@@ -10,6 +11,8 @@
         font-size: 11px;
     }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <html>
 <body>
@@ -24,17 +27,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label asp-for="NomeCompleto" class="form-control-label"></label>
+                                    <input asp-for="NomeCompleto" class="form-control" id="nome-acesso" placeholder="Digite o nome completo" required>
+                                    <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label asp-for="Email" class="form-control-label"></label>
                                     <input asp-for="Email" class="form-control" placeholder="Digite o e-mail" required>
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="NomeCompleto" class="form-control-label"></label>
-                                    <input asp-for="NomeCompleto" class="form-control" placeholder="Digite o nome de usuário" required>
-                                    <span asp-validation-for="NomeCompleto" class="text-danger"></span>
-                                </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Tipo de Acesso</label>
+                                <select class="form-control" onclick="validaCampoMedico()" name="PermissaoNome" id="campo-acesso">
+                                    <option value="" disabled selected>Selecione um tipo de acesso</option>
+                                    <option value="Admin">Administrativo</option>
+                                    <option value="Tecnologia">Tecnologia</option>
+                                    <option value="Medico">Médico</option>
+                                </select>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -50,8 +62,16 @@
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
                             </div>
+                            <div class="row" id="campos-medico" style="display:none">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Medico.Crm" class="form-control-label"></label>
+                                    <input asp-for="Medico.Crm" class="form-control" placeholder="Digite o CRM">
+                                </div>
+                            </div>
+                            <input type="hidden" asp-for="Medico.Nome" />
+                            <input type="hidden" asp-for="EnumStatusAcesso" value="1">
 
-                            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+                            <button type="submit" onclick="CapturaNomeAcesso()" class="btn btn-primary mt-3">Registrar</button>
                         </div>
                     </form>
                 </table>
@@ -60,3 +80,24 @@
     </main>
 </body>
 </html>
+
+
+<script>
+    function validaCampoMedico() {
+        var select = document.getElementById("campo-acesso");
+        var camposMedico = document.getElementById("campos-medico");
+        if (select.value === "Medico") {
+            camposMedico.style.display = "block";
+        } else {
+            camposMedico.style.display = "none";
+        }
+    }
+
+    function CapturaNomeAcesso() {
+        var select = document.getElementById("campo-acesso");
+        if (select.value === "Medico") {
+            var nomeAcesso = jQuery('#nome-acesso').val();
+            jQuery('#Medico_Nome').val(nomeAcesso);
+        }
+    }
+</script>

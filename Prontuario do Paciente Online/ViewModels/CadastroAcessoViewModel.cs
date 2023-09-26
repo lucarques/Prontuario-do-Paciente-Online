@@ -8,13 +8,16 @@ namespace Prontuario_do_Paciente_Online.ViewModels
     {
         public int Id { get; set; }
 
+        [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
 
+        [Display(Name = "E-mail")]
         [Required(ErrorMessage = "O campo de email é obrigatório.")]
         [RegularExpression(@"^.+@.+\..+$", ErrorMessage = "Informe um email válido.")]
         public string? Email { get; set; }
 
         [Required]
+        [Display(Name = "Senha")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
@@ -24,6 +27,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         public string? ConfirmPassword { get; set;}
 
         [Required]
+        [Display(Name = "Tipo de Acesso")]
         public string? PermissaoNome { get; set; }
 
         public MedicoViewModel? Medico { get; set; }
