@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Prontuario_do_Paciente_Online.Models;
 using Prontuario_do_Paciente_Online.Services;
 using Prontuario_do_Paciente_Online.ViewModels;
 
@@ -46,6 +47,16 @@ namespace Prontuario_do_Paciente_Online.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var acesso = new CadastroAcesso
+                    {
+                        NomeCompleto = model.CadastroAcesso.NomeCompleto,
+                        Email = model.CadastroAcesso.Email,
+                        PermissaoNome = model.CadastroAcesso.PermissaoNome,
+                        EnumStatusAcesso = model.CadastroAcesso.EnumStatusAcesso
+                    };
+
+                    _pacienteService.CadastrarAcesso(acesso);
+
                     var user = new IdentityUser
                     {
                         UserName = model.CadastroAcesso.Email,

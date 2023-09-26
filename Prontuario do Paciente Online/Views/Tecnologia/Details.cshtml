@@ -1,0 +1,27 @@
+﻿@model Prontuario_do_Paciente_Online.Models.CadastroAcesso;
+@{
+    ViewData["Title"] = "Detalhes Acesso Usuário";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4>@ViewData["Title"]</h4>
+<card>
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>@Model.NomeCompleto</td>
+        </tr>
+        <tr>
+            <td>E-mail</td>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td>Tipo Acesso</td>
+            <td>@Model.PermissaoNome</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@Model.EnumStatusAcesso</td>
+        </tr>
+    </table>
+</card>

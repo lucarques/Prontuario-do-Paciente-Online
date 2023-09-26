@@ -13,6 +13,35 @@ namespace Prontuario_do_Paciente_Online.Services
             _context = context;
         }
 
+        public void CadastrarAcesso(CadastroAcesso model)
+        {
+            try
+            {
+                CadastroAcesso novoCadastroAcesso = new CadastroAcesso
+                {
+                    NomeCompleto = model.NomeCompleto,
+                    Email = model.Email,
+                    PermissaoNome = model.PermissaoNome,
+                    EnumStatusAcesso = model.EnumStatusAcesso
+                };
+
+                _context.CadastroAcesso.Add(novoCadastroAcesso);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine("Detalhes da exceção interna: " + ex.InnerException.Message);
+                }
+                else
+                {
+                    Console.WriteLine("Erro genérico: " + ex.Message);
+                }
+
+            }
+            
+        }
         public IEnumerable<Paciente> ObterTodos()
         {
             return _context.Paciente.ToList();

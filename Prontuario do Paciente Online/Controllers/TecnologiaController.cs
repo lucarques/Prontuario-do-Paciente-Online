@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Prontuario_do_Paciente_Online.Models;
 using Prontuario_do_Paciente_Online.Services;
 using Prontuario_do_Paciente_Online.ViewModels;
 
@@ -9,31 +9,39 @@ namespace Prontuario_do_Paciente_Online.Controllers
     public class TecnologiaController : Controller
     {
         private readonly TecnologiaService _tecnologiaService;
-
+        private readonly PacienteService _pacienteService;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public TecnologiaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, TecnologiaService tecnologiaService)
+        public TecnologiaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, TecnologiaService tecnologiaService, PacienteService pacienteService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             _tecnologiaService = tecnologiaService;
+            _pacienteService = pacienteService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> IndexAsync()
+        public ActionResult Index()
         {
-            var users = await userManager.Users.ToListAsync();
+            var users = _tecnologiaService.ObterTodos();
             return View(users);
         }
 
         [HttpGet]
-        public ActionResult Details(string email)
+        public ActionResult Details(int id)
         {
-            var user = userManager.FindByEmailAsync(email);
+            var user = _tecnologiaService.ObterDetalhesPorId(id);
             return View(user);
+        }
+
+        [HttpGet]
+        public ActionResult ObterPorTipoAcesso(string tipoAcesso)
+        {
+            var result = _tecnologiaService.ObterPorTipoAcesso(tipoAcesso);
+            return Json(result);
         }
 
         [HttpGet]
@@ -45,38 +53,61 @@ namespace Prontuario_do_Paciente_Online.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(CadastroAcessoViewModel model)
         {
-            var user = new IdentityUser
+            try
             {
-                UserName = model.Email,
-                Email = model.Email
-            };
+                if (ModelState.IsValid || (model.Medico.Nome == null))
+                {
+                    var acesso = new CadastroAcesso()
+                    {
+                        NomeCompleto = model.NomeCompleto,
+                        Email = model.Email,
+                        EnumStatusAcesso = model.EnumStatusAcesso,
+                        PermissaoNome = model.PermissaoNome,
+                    };
 
-            if (model.Medico.Nome != null)
-            {
-                try
-                {
-                    _tecnologiaService.CadastroNovoMedico(model);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Ocorreu uma exceção durante o cadastro do médico: {ex.Message}");
+                    _pacienteService.CadastrarAcesso(acesso);
+
+                    var user = new IdentityUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email
+                    };
+
+                    if (model.Medico.Nome != null)
+                    {
+                        try
+                        {
+                            _tecnologiaService.CadastroNovoMedico(model);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Ocorreu uma exceção durante o cadastro do médico: {ex.Message}");
+                        }
+                    }
+
+                    var result = await userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        var role = await roleManager.FindByNameAsync(model.PermissaoNome);
+                        if (role != null)
+                            await userManager.AddToRoleAsync(user, role.Name);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View(model);
+
                 }
             }
-
-            var result = await userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
+            catch
             {
-                var role = await roleManager.FindByNameAsync(model.PermissaoNome);
-                if (role != null)
-                    await userManager.AddToRoleAsync(user, role.Name);
-                return RedirectToAction("Index", "Home");
-            }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
+                return View(model);
             }
             return View(model);
+
         }
 
         [HttpPost]

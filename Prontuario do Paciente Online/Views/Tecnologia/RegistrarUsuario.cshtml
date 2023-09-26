@@ -1,5 +1,5 @@
-﻿@using Prontuario_do_Paciente_Online.Models.Enums;
-@model Prontuario_do_Paciente_Online.ViewModels.CadastroAcessoViewModel;
+﻿@model Prontuario_do_Paciente_Online.ViewModels.CadastroAcessoViewModel;
+
 @{
     ViewData["Title"] = "Cadastro de Usuário Interno";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -12,8 +12,6 @@
 </style>
 
 <html>
-<head>
-</head>
 <body>
     <main class="main-content mt-4">
         <div class="card p-4">
@@ -33,51 +31,27 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="Usuario" class="form-control-label"></label>
-                                    <input asp-for="Usuario" class="form-control" placeholder="Digite o nome de usuário" required>
-                                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                                    <label asp-for="NomeCompleto" class="form-control-label"></label>
+                                    <input asp-for="NomeCompleto" class="form-control" placeholder="Digite o nome de usuário" required>
+                                    <span asp-validation-for="NomeCompleto" class="text-danger"></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Password" class="form-control-label"></label>
                                     <input asp-for="Password" class="form-control" placeholder="Digite a senha" required>
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="ConfirmPassword" class="form-control-label"></label>
                                     <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Digite a senha novamente" required>
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label">Acesso</label>
-                                    <select asp-for="PermissaoNome" id="campo-acesso" class="form-control" onchange="validaCampoMedico()">
-                                        <option value="" disabled selected>Selecione o tipo de acesso</option>
-                                        <option value="@EnumPermissoes.Administrativo">Administrativo</option>
-                                        <option value="@EnumPermissoes.Tecnologia">Tecnologia</option>
-                                        <option value="@EnumPermissoes.Medico">Médico</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" id="campos-medico" style="display: none;">
-                                <div class="form-group col-md-6">
-                                    <label asp-for="Medico.Nome" class="form-control-label"></label>
-                                    <input asp-for="Medico.Nome" class="form-control" placeholder="Digite o nome do médico">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label asp-for="Medico.Crm" class="form-control-label"></label>
-                                    <input asp-for="Medico.Crm" class="form-control" placeholder="Digite o CRM">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-sm mt-3">Registrar</button>
+
+                            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
                         </div>
                     </form>
                 </table>
@@ -86,15 +60,3 @@
     </main>
 </body>
 </html>
-<script>
-    function validaCampoMedico() {
-        var select = document.getElementById("campo-acesso");
-        var camposMedico = document.getElementById("campos-medico");
-
-        if (select.value === "@EnumPermissoes.Medico") {
-            camposMedico.style.display = "block";
-        } else {
-            camposMedico.style.display = "none";
-        }
-    }
-</script>

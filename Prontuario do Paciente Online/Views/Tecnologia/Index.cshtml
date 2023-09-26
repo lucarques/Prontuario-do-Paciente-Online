@@ -1,16 +1,27 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@model IEnumerable<IdentityUser>
-
+﻿@model IEnumerable<Prontuario_do_Paciente_Online.Models.CadastroAcesso>
 @{
-    ViewData["Title"] = "Cadastro de Usuário Interno";
+    ViewData["Title"] = "Usuários Cadastrados";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="filter-container">
+    <label for="filtroTipoAcesso">Filtrar por Tipo de Acesso:</label>
+    <select id="filtroTipoAcesso">
+        <option value="">Todos</option>
+        <option value="Acompanhante">Acompanhante</option>
+        <option value="Admin">Admin</option>
+        <option value="Tecnologia">Tecnologia</option>
+        <option value="Medico">Médico</option>
+    </select>
+</div>
 
 <body>
     <div class="main-content mt-4">
         <div class="card p-4">
             <div class="title-text m-4">
+            <h2>@ViewData["Title"]</h2>
             </div>
             <div class="table-responsive">
                 @if (Model.Any())
@@ -18,8 +29,10 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">E-mail</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tipo de Acesso</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status Acesso</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ações</th>
                             </tr>
                         </thead>
@@ -28,13 +41,20 @@
                             {
                                 <tr>
                                     <td class="my-auto">
-                                        <h3 class="mb-0 text-xs"> @item.Id</h3>
+                                        <h3 class="mb-0 text-xs"> @item.NomeCompleto</h3>
                                     </td>
                                     <td class="my-auto">
                                         <h3 class="mb-0 text-xs"> @item.Email</h3>
                                     </td>
+                                    <td class="my-auto">
+                                        <h3 class="mb-0 text-xs"> @item.PermissaoNome</h3>
+                                    </td>
+                                    <td class="my-auto">
+                                        <h3 class="mb-0 text-xs"> @item.EnumStatusAcesso</h3>
+                                    </td>
                                     <td>
-                                        <a asp-controller="tecnologia" asp-action="details" asp-route-id="@item.Email" class="btn btn-default btn-sm ">Detalhes </a>
+                                        <a asp-controller="tecnologia" asp-action="Details" asp-route-id="@item.Id" class="btn btn-default btn-sm ">Detalhes </a>
+                                        <a asp-controller="tecnologia" asp-action="Inativar" asp-route-id="@item.Id" class="btn btn-secondary btn-sm  ">Inativar</a>
                                     </td>
                                 </tr>
                             }
@@ -49,3 +69,29 @@
         </div>
     </div>
 </body>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        debugger;
+        $("#filtroTipoAcesso").change(function () {
+            var selectedTipoAcesso = $(this).val();
+            var url = "/Tecnologia/ObterPorTipoAcesso?tipoAcesso=" + selectedTipoAcesso;
+            $.get(url, function (data) {
+                var tableBody = $(".table tbody");
+                tableBody.empty();
+                if (data && data.length > 0) {
+                    $.each(data, function (index, item) {
+                        var newRow = "<tr><td>" + item.Nome + "</td><td>" + item.Valor + "</td></tr>";
+                        tableBody.append(newRow);
+                    });
+                } else {
+                    var errorRow = "<tr><td colspan='2'>Dados não disponíveis</td></tr>";
+                    tableBody.append(errorRow);
+                }
+            });
+        });
+    });
+</script>

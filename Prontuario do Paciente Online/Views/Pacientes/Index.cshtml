@@ -20,6 +20,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Idade</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Motivo da Internacao</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Data da Internacao</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ações</th>
                             </tr>
                         </thead>
@@ -39,9 +40,11 @@
                                     <td class="my-auto">
                                         <h3 class="mb-0 text-xs"> @item.MotivoInternacao</h3>
                                     </td>
+                                    <td class="my-auto">
+                                        <h3 class="mb-0 text-xs"> @item.DataInternacao</h3>
+                                    </td>
                                     <td>
-@*                                        <a asp-controller="pacientes" asp-action="edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm disabled">Editar</a>
-*@                                        <a asp-controller="pacientes" asp-action="details" asp-route-id="@item.Id" class="btn btn-default btn-sm">Detalhes</a>
+                                       <a asp-controller="pacientes" asp-action="details" asp-route-id="@item.Id" class="btn btn-default btn-sm">Detalhes</a>
                                     </td>
                                 </tr>
                             }
