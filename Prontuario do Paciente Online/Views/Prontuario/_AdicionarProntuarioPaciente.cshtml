@@ -1,4 +1,4 @@
-﻿@model Prontuario_do_Paciente_Online.ViewModels.ProntuarioViewModel;
+﻿@model Prontuario_do_Paciente_Online.ViewModels.ProntuarioCreateViewModel;
 
 <style>
     .btn-gray-background {
@@ -17,27 +17,24 @@
             </div>
             <div class="modal-body">
                 <form asp-action="InserirProntuario" method="POST">
+                    <input type="hidden" asp-for="PacienteId" />
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="nome" class="form-label">Nome:</label>
-                                <input type="text" class="form-control btn-gray-background" id="nome" name="Paciente" value="@Model.Paciente.Nome">
+                                <input type="text" class="form-control btn-gray-background" asp-for="PacienteNome" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="dataInternacao" class="form-label">Data de internação:</label>
-                                <input type="date" class="form-control btn-gray-background" id="dataInternacao" value="@Model.Paciente.DataInternacao.ToString("yyyy-MM-dd")" disabled>
+                                <input type="date" class="form-control btn-gray-background" asp-for="PacienteDataInternacao" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="dataProntuario" class="form-label">Data do Prontuário:</label>
-                                <input type="date" class="form-control btn-gray-background" id="dataProntuario" disabled>
-                            </div>
-                            <div class="col-md-6">
                                 <label class="form-control-label">Ala do paciente:</label>
-                                <input asp-for="Quarto" name="Quarto" class="form-control">
+                                <input asp-for="Quarto" class="form-control">
                                 <span asp-validation-for="Quarto" class="text-danger"></span>
                             </div>
                         </div>
@@ -46,12 +43,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="medicoResponsavel" class="form-label">Médico Responsável:</label>
-                                <select class="form-select" id="medicoResponsavel" name="Medico" required>
+                                <select class="form-select" asp-for="MedicoId" required>
                                     <option value="" selected>Selecione o seu cadastro</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-control-label">Status:</label>
                         <select class="form-control" name="EnumStatus" required>
@@ -62,12 +60,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="diagnostico" class="form-label">Diagnóstico:</label>
-                        <textarea id="diagnostico" name="Diagnostico" class="form-control" rows="1" required></textarea>
+                        <label asp-for="Diagnostico" class="form-label">Diagnóstico:</label>
+                        <textarea asp-for="Diagnostico" class="form-control" rows="1" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="avaliacao-medico" class="form-label">Avaliação do Médico Responsável:</label>
-                        <textarea id="avaliacao-medico" name="AvaliacaoMedico" class="form-control" rows="4" required></textarea>
+                        <label asp-for="AvaliacaoMedico" class="form-label">Avaliação do Médico Responsável:</label>
+                        <textarea asp-for="AvaliacaoMedico" class="form-control" rows="4" required></textarea>
                     </div>
 
                     <div class="modal-footer">
@@ -81,37 +79,31 @@
 </div>
 
 <script>
-    var dataAtual = new Date().toISOString().split('T')[0];
-    document.getElementById("dataProntuario").value = dataAtual;
-
     //carregar drop-down
     $(document).ready(function () {
-        $("#medicoResponsavel").click(function () {
-            if ($(this).children().length <= 1) {
-                $.ajax({
-                    url: "/Prontuario/ObterTodosMedicos",
-                    type: "GET",
-                    dataType: "json",
-                    success: function (medicos) {
-                        let dropdown = $("#medicoResponsavel");
-                        dropdown.empty();
+        $.ajax({
+            url: "/Prontuario/ObterTodosMedicos",
+            type: "GET",
+            dataType: "json",
+            success: function (medicos) {
+                let dropdown = $("#MedicoId");
+                dropdown.empty();
 
-                        dropdown.append($('<option>', {
-                            value: "",
-                            text: "Selecione o seu cadastro"
-                        }));
+                dropdown.append($('<option>', {
+                    value: "",
+                    text: "Selecione o seu cadastro"
+                }));
 
-                        $.each(medicos, function (i, medico) {
-                            debugger;
-                            dropdown.append($('<option>', {
-                                value: medico.id,
-                                text: "(" + medico.crm + ") Dr(a). " + medico.nome
-                            }));
-                        });
-                        dropdown.show();
-                    }
+                $.each(medicos, function (i, medico) {
+                    debugger;
+                    dropdown.append($('<option>', {
+                        value: medico.id,
+                        text: "(" + medico.crm + ") Dr(a). " + medico.nome
+                    }));
                 });
+                dropdown.show();
             }
         });
     });
+
 </script>

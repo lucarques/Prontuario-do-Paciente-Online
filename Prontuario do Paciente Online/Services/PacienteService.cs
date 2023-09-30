@@ -8,6 +8,7 @@ namespace Prontuario_do_Paciente_Online.Services
     public class PacienteService
     {
         private readonly Contexto _context;
+        
         public PacienteService(Contexto context)
         {
             _context = context;
@@ -42,6 +43,7 @@ namespace Prontuario_do_Paciente_Online.Services
             }
             
         }
+        
         public IEnumerable<Paciente> ObterTodos()
         {
             return _context.Paciente.ToList();
