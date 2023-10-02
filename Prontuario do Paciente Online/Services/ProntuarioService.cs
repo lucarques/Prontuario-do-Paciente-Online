@@ -9,7 +9,7 @@ namespace Prontuario_do_Paciente_Online.Services
     public class ProntuarioService
     {
         private readonly Contexto _context;
-        
+
         public ProntuarioService(Contexto context)
         {
             _context = context;
@@ -31,6 +31,7 @@ namespace Prontuario_do_Paciente_Online.Services
 
             var viewModel = new PacientesViewModel
             {
+                Id = id,
                 Nome = paciente!.Nome,
                 Idade = paciente.Idade,
                 Cpf = paciente.Cpf,
@@ -44,60 +45,55 @@ namespace Prontuario_do_Paciente_Online.Services
             return viewModel;
         }
 
-        public ProntuarioViewModel ObterDetalhesProntuarioPorPaciente(int id)
-        {
-            var prontuario = _context.Prontuario.FirstOrDefault(x => x.Id == id);
+        //public ProntuarioViewModel ObterDetalhesProntuarioPorPaciente(int id)
+        //{
+        //    var prontuario = _context.Prontuario.FirstOrDefault(x => x.Id == id);
 
-            var viewModel = new ProntuarioViewModel
-            {
-                Diagnostico = prontuario.Diagnostico,
-                Quarto = prontuario.Quarto,
-                AvaliacaoMedico = prontuario.AvaliacaoMedico,
-                DataProntuario = prontuario.DataProntuario,
-                Medico = new MedicoViewModel
-                {
-                    Nome = prontuario.Medico.Nome,
-                    Crm = prontuario.Medico.Crm
-                },
-                Paciente = new PacientesViewModel
-                {
-                    Nome = prontuario.Paciente.Nome,
-                    Idade = prontuario.Paciente.Idade
-                },
+        //    var viewModel = new ProntuarioViewModel
+        //    {
+        //        Diagnostico = prontuario.Diagnostico,
+        //        Quarto = prontuario.Quarto,
+        //        AvaliacaoMedico = prontuario.AvaliacaoMedico,
+        //        DataProntuario = prontuario.DataProntuario,
+        //        Medico = new MedicoViewModel
+        //        {
+        //            Nome = prontuario.Medico.Nome,
+        //            Crm = prontuario.Medico.Crm
+        //        },
+        //        Paciente = new PacientesViewModel
+        //        {
+        //            Nome = prontuario.Paciente.Nome,
+        //            Idade = prontuario.Paciente.Idade
+        //        },
 
-                EnumStatus = prontuario.EnumStatus
-            };
-            return viewModel;
-        }
+        //        EnumStatus = prontuario.EnumStatus
+        //    };
+        //    return viewModel;
+        //}
 
         public bool InserirProntuario(ProntuarioCreateViewModel model)
         {
             try
             {
-                var paciente = _context.Paciente.AsNoTracking().FirstOrDefault(p => p.Id == model.PacienteId);
+                var paciente = _context.Paciente.AsNoTracking().FirstOrDefault(p => p.Id == model.Paciente.Id);
 
                 if (paciente == null)
-                    return false;                
+                    return false;
 
                 var novoProntuario = new Prontuario
                 {
-                    Diagnostico = model.Diagnostico,
                     Quarto = model.Quarto,
+                    Diagnostico = model.Diagnostico,
                     AvaliacaoMedico = model.AvaliacaoMedico,
-                    DataProntuario = DateTime.UtcNow,
-                    Medico = new Medico
-                    {
-                        Id = model.MedicoId
-                    },
-                    Paciente = new Paciente
-                    {
-                        Id = model.PacienteId
-                    },
+                    DataProntuario = model.DataProntuario,
+                    PacienteId = model.Paciente.Id,
+                    MedicoId = model.Medico.Id,
                     EnumStatus = model.EnumStatus
                 };
 
                 _context.Prontuario.Add(novoProntuario);
-                return _context.SaveChanges() > 0;
+                _context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
@@ -105,9 +101,8 @@ namespace Prontuario_do_Paciente_Online.Services
                     Console.WriteLine("Detalhes da exceção interna: " + ex.InnerException.Message);
                 else
                     Console.WriteLine("Erro genérico: " + ex.Message);
+                return false;
             }
-
-            return false;
         }
     }
 }
