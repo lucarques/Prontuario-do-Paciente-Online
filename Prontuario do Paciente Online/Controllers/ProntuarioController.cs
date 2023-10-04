@@ -35,6 +35,13 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
+        public ActionResult ObterTodosProntuarios()
+        {
+            var list = _prontuarioService.ObterTodosProntuario();
+            return Json(list);
+        }
+
+        [HttpGet]
         public ActionResult AdicionarProntuario(int id)
         {
             var paciente = _pacienteService.ObterDetalhes(id);

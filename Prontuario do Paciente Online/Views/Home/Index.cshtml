@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModel;
+@model Prontuario_do_Paciente_Online.ViewModels.ProntuarioViewModel;
 @inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Index";
@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Motivo Internação</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Diagnostico</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cid</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data internação</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>

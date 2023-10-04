@@ -16,11 +16,12 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         [RegularExpression(@"^.+@.+\..+$", ErrorMessage = "Informe um email válido.")]
         public string? Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo Senha é obrigatório.")]
         [Display(Name = "Senha")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
+        [Required(ErrorMessage = "O campo Confirme a senha é obrigatório.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirme a senha")]
         [Compare("Password", ErrorMessage = "As senhas não conferem")]

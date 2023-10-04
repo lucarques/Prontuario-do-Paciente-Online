@@ -15,9 +15,30 @@ namespace Prontuario_do_Paciente_Online.Services
             _context = context;
         }
 
+        //public bool VerificarProntuarioPorData(ProntuarioViewModel model)
+        //{
+        //    var prontuarioExistente = 
+
+        //    if (paciente == null)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //    //_context.Paciente.AsNoTracking().FirstOrDefault(p => p.Id == model.PacienteId);
+
+
+        //}
         public List<Paciente> ObterTodos()
         {
             return _context.Paciente.ToList();
+        }
+
+        public List<Prontuario> ObterTodosProntuario()
+        {
+            return _context.Prontuario.ToList();
         }
 
         public List<Medico> ObterTodosMedicos()
