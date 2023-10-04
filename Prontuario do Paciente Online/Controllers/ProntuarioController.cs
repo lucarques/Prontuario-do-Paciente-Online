@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Prontuario_do_Paciente_Online.Models;
 using Prontuario_do_Paciente_Online.Services;
 using Prontuario_do_Paciente_Online.ViewModels;
+using System.Linq.Expressions;
 
 namespace Prontuario_do_Paciente_Online.Controllers
 {
-    [Authorize(Roles ="Medico, Tecnologia")]
-   
+    [Authorize(Roles = "Medico, Tecnologia")]
+
     public class ProntuarioController : Controller
     {
         private readonly ProntuarioService _prontuarioService;
+        private readonly PacienteService _pacienteService;
 
-        public ProntuarioController(ProntuarioService prontuarioService)
+        public ProntuarioController(ProntuarioService prontuarioService, PacienteService pacienteService)
         {
             _prontuarioService = prontuarioService;
+            _pacienteService = pacienteService;
         }
 
         [HttpGet]
@@ -31,32 +35,37 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
+        public ActionResult ObterTodosProntuarios()
+        {
+            var list = _prontuarioService.ObterTodosProntuario();
+            return Json(list);
+        }
+
+        [HttpGet]
         public ActionResult AdicionarProntuario(int id)
         {
-            var dados = _prontuarioService.ObterDadosIniciaisProntuarioPorPaciente(id);
-            if (ModelState.IsValid)
+            var paciente = _pacienteService.ObterDetalhes(id);
+
+            var model = new ProntuarioCreateViewModel
             {
-                return PartialView("_AdicionarProntuarioPaciente", dados);
-            }
-            return View(dados);
+                Id = paciente.Id,
+                Paciente = new Paciente
+                {
+                    Id = id,
+                    Nome = paciente.Nome,
+                    DataInternacao = paciente.DataInternacao
+
+                }
+            };
+
+            return PartialView("_AdicionarProntuarioPaciente", model);
         }
 
         [HttpPost]
-        public ActionResult InserirProntuario(ProntuarioViewModel model)
+        public IActionResult InserirProntuario(ProntuarioCreateViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _prontuarioService.InserirProntuario(model);
-                    return RedirectToAction("Sucesso");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Ocorreu um erro ao inserir o prontuário: " + ex.Message);
-                }
-            }
-            return View(model);
+            _prontuarioService.InserirProntuario(model);
+            return RedirectToAction("Index");
         }
 
     }

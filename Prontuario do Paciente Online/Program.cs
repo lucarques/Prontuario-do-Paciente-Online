@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<ProntuarioService>();
 builder.Services.AddScoped<TecnologiaService>();
@@ -54,7 +55,6 @@ await CriarPerfisUsuariosAsync(app);
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllerRoute(
     name: "default",

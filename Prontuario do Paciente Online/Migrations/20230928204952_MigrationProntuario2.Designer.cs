@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Prontuario_do_Paciente_Online.Models;
@@ -11,9 +12,11 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230928204952_MigrationProntuario2")]
+    partial class MigrationProntuario2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,9 +410,8 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("PacienteId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Quarto")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Quarto")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -7,16 +7,29 @@ namespace Prontuario_do_Paciente_Online.ViewModels
     public class ProntuarioViewModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
+        public Paciente Paciente { get; set; }
+        public Medico Medico { get; set; }
+        public int MedicoId { get; set; }
+        public int PacienteId { get; set; }
+        public string Quarto { get; set; }
         public string Diagnostico { get; set; }
-        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
-        public int Quarto { get; set; }
-        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public string AvaliacaoMedico { get; set; }
-        public DateTime DataProntuario { get; set; }
-        public MedicoViewModel Medico { get; set; }
-        public PacientesViewModel Paciente { get; set; }
-        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
+        public DateTime? DataProntuario { get; set; }
         public EnumStatus EnumStatus { get; set; }
+    }
+
+    public class ProntuarioCreateViewModel
+    {
+        public int Id { get; set; }
+        public Paciente Paciente {get; set;}
+        public Medico Medico { get; set; }
+        public int MedicoId { get; set; }
+        public int PacienteId { get; set; }
+        public string Quarto { get; set; }
+        public string Diagnostico { get; set; }
+        public string AvaliacaoMedico { get; set; }
+        public DateTime DataProntuario { get; set; }= DateTime.UtcNow;
+        public EnumStatus EnumStatus { get; set; }
+
     }
 }
