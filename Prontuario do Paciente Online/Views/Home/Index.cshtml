@@ -9,13 +9,14 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
+<link rel="stylesheet" type="text/css" href="~/css/site.css">
 
 @if (!User.IsInRole("Acompanhante"))
 {
     <body>
        <main class="main-content mt-4 d-flex">
-         <div class="row">
-            <div class="card col-md-8 ">
+         <div class="row2">
+            <div class="card col-md-8 mr-20">
                 <div class="tittle-text m-4">
                     <h3>RESUMO DE PACIENTES</h3>
                 </div>
@@ -176,7 +177,7 @@
                      </div>
             </div>
 
-                <div class="card col-md-4 p-5 w-26">
+                <div class="card col-md-4 p-5 w-26 d-flex">
                     <div class="card-body">
                         <p>Quantidade Pacientes por Status</p>
                         <div class="chart">

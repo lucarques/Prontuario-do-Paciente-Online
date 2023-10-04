@@ -21,3 +21,11 @@ body {
     font-size: 11px;
 }
 
+.row2 {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    grid-gap: 20px;
+    display: flex;
+    
+}
+
