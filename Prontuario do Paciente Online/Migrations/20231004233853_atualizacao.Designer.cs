@@ -12,8 +12,8 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230928204952_MigrationProntuario2")]
-    partial class MigrationProntuario2
+    [Migration("20231004233853_atualizacao")]
+    partial class atualizacao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -410,8 +410,9 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     b.Property<int>("PacienteId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Quarto")
-                        .HasColumnType("integer");
+                    b.Property<string>("Quarto")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

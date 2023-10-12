@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationProntuario2 : Migration
+    public partial class atualizacao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -257,7 +257,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Diagnostico = table.Column<string>(type: "text", nullable: false),
-                    Quarto = table.Column<int>(type: "integer", nullable: false),
+                    Quarto = table.Column<string>(type: "text", nullable: false),
                     AvaliacaoMedico = table.Column<string>(type: "text", nullable: false),
                     DataProntuario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     MedicoId = table.Column<int>(type: "integer", nullable: false),
