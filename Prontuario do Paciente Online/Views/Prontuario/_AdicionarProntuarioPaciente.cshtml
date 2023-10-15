@@ -5,6 +5,29 @@
         background-color: gainsboro
     }
 
+    .modal-dialog {
+        max-width: 850px;
+    }
+
+    .modal-content {
+        width: 100%;
+        height: 830px;
+    }
+
+    .btn-gray-background {
+        background-color: gainsboro;
+    }
+
+    .modal-fixed-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .limited-textarea {
+        max-height: 200px;
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -23,7 +46,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="nome" class="form-label">Nome:</label>
-                                <input type="text" class="form-control btn-gray-background" value ="@Model.Paciente.Nome" readonly>
+                                <input type="text" class="form-control btn-gray-background" value="@Model.Paciente.Nome" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="dataInternacao" class="form-label">Data de internação:</label>
@@ -62,17 +85,18 @@
                     </div>
                     <div class="mb-3">
                         <label asp-for="Diagnostico" class="form-label">Diagnóstico:</label>
-                        <textarea asp-for="Diagnostico" class="form-control" rows="1" required></textarea>
-                        <a href="http://tabnet.datasus.gov.br/cgi/sih/mxcid10lm.htm" style="font-size: smaller; font-style: italic;" target="_blank">Lista de Tabulação para Morbidade</a>
+                        <input asp-for="Diagnostico" class="form-control" rows="1" required>
+                        <a href="http://tabnet.datasus.gov.br/cgi/sih/mxcid10lm.htm" style="font-size: x-small; font-style: italic;" target="_blank">Lista de Tabulação para Morbidade</a>
                     </div>
                     <div class="mb-3">
                         <label asp-for="AvaliacaoMedico" class="form-label">Avaliação do Médico Responsável:</label>
-                        <textarea asp-for="AvaliacaoMedico" class="form-control" rows="4" required></textarea>
+                        <textarea asp-for="AvaliacaoMedico" class="form-control limited-textarea" rows="6" required></textarea>
                     </div>
-
-                    <div class="modal-footer ">
-                        <a href="@Url.Action("Index", "Prontuario")" type="button" class="btn btn-secondary">Fechar</a>
-                        <button type="submit" class="btn btn-success">Adicionar</button>
+                    <div class="modal-fixed-footer">
+                        <div class="modal-footer ">
+                            <a href="@Url.Action("Index", "Prontuario")" type="button" class="btn btn-secondary">Fechar</a>
+                            <button type="submit" class="btn btn-success">Adicionar</button>
+                        </div>
                     </div>
                 </form>
             </div>

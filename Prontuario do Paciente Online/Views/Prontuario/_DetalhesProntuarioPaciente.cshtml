@@ -5,6 +5,23 @@
         background-color: gainsboro
     }
 
+    .modal-dialog {
+        max-width: 850px;
+    }
+
+    .modal-content {
+        width: 100%;
+        height: 830px;
+    }
+
+    .btn-gray-background {
+        background-color: gainsboro;
+    }
+
+    .limited-textarea {
+        max-height: 200px;
+    }
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -67,7 +84,7 @@
                     <div class="mb-3">
                         <div class="col-md-12">
                             <label for="avaliacao" class="form-label">Avaliação do médico responsável:</label>
-                            <textarea class="form-control btn-gray-background" readonly>@Model.AvaliacaoMedico</textarea>
+                            <textarea class="form-control btn-gray-background limited-textarea" rows="8" readonly>@Model.AvaliacaoMedico</textarea>
                         </div>
                     </div>
 
