@@ -1,0 +1,95 @@
+﻿@model Prontuario_do_Paciente_Online.ViewModels.ProntuarioViewModel;
+
+<style>
+    .btn-gray-background {
+        background-color: gainsboro
+    }
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div id="modalDetalhesInserirProntuario" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes Prontuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="DetalhesProntuario" method="GET">
+                    <input type="hidden" asp-for="Paciente.Id" />
+                    <input type="hidden" asp-for="Medico.Nome" />
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control btn-gray-background" value="@Model.Paciente.Nome" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dataInternacao" class="form-label">Data de internação:</label>
+                                <input type="date" class="form-control btn-gray-background" asp-for="Paciente.DataInternacao" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="leito" class="form-label">Leito do Paciente:</label>
+                                <input type="text" class="form-control btn-gray-background" value="@Model.Quarto" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="data-prontuario" class="form-label">Data do prontuário:</label>
+                                <input type="text" class="form-control btn-gray-background" value="@Model.DataProntuario" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="medico" class="form-label">Médico Responsável:</label>
+                                <input type="text" class="form-control btn-gray-background" value="@($"({Model.Medico.Crm}) Dr(a). {Model.Medico.Nome}")" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="col-md-12">
+                            <label for="status" class="form-label">Status:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.EnumStatus" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-md-12">
+                            <label for="diagnostico" class="form-label">Diagnostico:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.Diagnostico" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-md-12">
+                            <label for="avaliacao" class="form-label">Avaliação do médico responsável:</label>
+                            <textarea class="form-control btn-gray-background" readonly>@Model.AvaliacaoMedico</textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer ">
+                        <a href="@Url.Action("Index", "Prontuario")" type="button" class="btn btn-secondary">Fechar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Prontuario/DetalhesProntuario",
+            type: "GET",
+            dataType: "json",
+            success: function () {});
+             
+            }
+        });
+    });
+
+</script>

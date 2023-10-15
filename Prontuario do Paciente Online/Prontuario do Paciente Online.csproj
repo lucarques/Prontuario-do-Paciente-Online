@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Prontuario\_AdicionarProntuario.cshtml" />
+    <Content Remove="wwwroot\css\styles.css" />
   </ItemGroup>
 
   <ItemGroup>

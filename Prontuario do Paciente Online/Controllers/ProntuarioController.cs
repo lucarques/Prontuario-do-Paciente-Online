@@ -23,6 +23,7 @@ namespace Prontuario_do_Paciente_Online.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.ProntuarioService = _prontuarioService;
             var list = _prontuarioService.ObterTodos();
             return View(list);
         }
@@ -31,13 +32,6 @@ namespace Prontuario_do_Paciente_Online.Controllers
         public ActionResult ObterTodosMedicos()
         {
             var list = _prontuarioService.ObterTodosMedicos();
-            return Json(list);
-        }
-
-        [HttpGet]
-        public ActionResult ObterTodosProntuarios()
-        {
-            var list = _prontuarioService.ObterTodosProntuario();
             return Json(list);
         }
 
@@ -53,12 +47,19 @@ namespace Prontuario_do_Paciente_Online.Controllers
                 {
                     Id = id,
                     Nome = paciente.Nome,
-                    DataInternacao = paciente.DataInternacao
+                    DataInternacao = paciente.DataInternacao.Date
 
                 }
             };
 
             return PartialView("_AdicionarProntuarioPaciente", model);
+        }
+
+        [HttpGet]
+        public ActionResult DetalhesProntuario(int id)
+        {
+            var prontuarioPaciente = _prontuarioService.ObterDetalhesDoProntuario(id);
+            return PartialView("_DetalhesProntuarioPaciente", prontuarioPaciente);
         }
 
         [HttpPost]

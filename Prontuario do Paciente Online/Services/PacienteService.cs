@@ -63,6 +63,7 @@ namespace Prontuario_do_Paciente_Online.Services
                 Endereco = paciente.Endereco,
                 Numero = paciente.Numero,
                 MotivoInternacao = paciente.MotivoInternacao,
+                DataInternacao = paciente.DataInternacao,
                 Acompanhante = new AcompanhanteViewModel
                 {
                     NomeAcompanhante = paciente.Acompanhante.NomeAcompanhante,

@@ -15,22 +15,42 @@ namespace Prontuario_do_Paciente_Online.Services
             _context = context;
         }
 
-        //public bool VerificarProntuarioPorData(ProntuarioViewModel model)
-        //{
-        //    var prontuarioExistente = 
+        public bool VerificaProntuarioExistenteHoje(int pacienteId)
+        {
+            DateTime dataHojeUtc = DateTime.Now.ToUniversalTime();
+            return _context.Prontuario.Any(p => p.PacienteId == pacienteId && p.DataProntuario.Day == dataHojeUtc.Day);
+        }
 
-        //    if (paciente == null)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //    //_context.Paciente.AsNoTracking().FirstOrDefault(p => p.Id == model.PacienteId);
+        public ProntuarioViewModel ObterDetalhesDoProntuario(int pacienteId)
+        {
+            DateTime dataHojeUtc = DateTime.Now.ToUniversalTime();
 
+            var prontuario = _context.Prontuario
+             .Include(x => x.Paciente)
+             .Include(x => x.Medico)
+             .FirstOrDefault(x => x.PacienteId == pacienteId && x.DataProntuario.Day == dataHojeUtc.Day);
 
-        //}
+            var viewModel = new ProntuarioViewModel
+            {
+                Quarto = prontuario!.Quarto,
+                Diagnostico = prontuario.Diagnostico,
+                AvaliacaoMedico = prontuario.AvaliacaoMedico,
+                DataProntuario = prontuario.DataProntuario,
+                Paciente = new Paciente
+                {
+                    Nome = prontuario.Paciente.Nome,
+                    DataInternacao = prontuario.Paciente.DataInternacao
+                },
+                Medico = new Medico
+                {
+                    Crm = prontuario.Medico.Crm,
+                    Nome = prontuario.Medico.Nome
+                },
+                EnumStatus = prontuario.EnumStatus
+            };
+            return viewModel;
+        }
+
         public List<Paciente> ObterTodos()
         {
             return _context.Paciente.ToList();
@@ -65,32 +85,6 @@ namespace Prontuario_do_Paciente_Online.Services
             };
             return viewModel;
         }
-
-        //public ProntuarioViewModel ObterDetalhesProntuarioPorPaciente(int id)
-        //{
-        //    var prontuario = _context.Prontuario.FirstOrDefault(x => x.Id == id);
-
-        //    var viewModel = new ProntuarioViewModel
-        //    {
-        //        Diagnostico = prontuario.Diagnostico,
-        //        Quarto = prontuario.Quarto,
-        //        AvaliacaoMedico = prontuario.AvaliacaoMedico,
-        //        DataProntuario = prontuario.DataProntuario,
-        //        Medico = new MedicoViewModel
-        //        {
-        //            Nome = prontuario.Medico.Nome,
-        //            Crm = prontuario.Medico.Crm
-        //        },
-        //        Paciente = new PacientesViewModel
-        //        {
-        //            Nome = prontuario.Paciente.Nome,
-        //            Idade = prontuario.Paciente.Idade
-        //        },
-
-        //        EnumStatus = prontuario.EnumStatus
-        //    };
-        //    return viewModel;
-        //}
 
         public bool InserirProntuario(ProntuarioCreateViewModel model)
         {

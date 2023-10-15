@@ -8,7 +8,7 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div id="modalInserirProntuario" class="modal" tabindex="-1">
+<div id="modalInserirProntuario" class="modal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -33,8 +33,8 @@
                     </div>
                     <div class="mb-3">
                         <div class="row">
-                            <div class="col-md-6">
-                                <label class="form-control-label">ALA do paciente: </label>
+                            <div class="col-md-12">
+                                <label class="form-control-label">Leito do paciente: </label>
                                 <input asp-for="Quarto" class="form-control" required>
                                 <span asp-validation-for="Quarto" class="text-danger"></span>
                             </div>
@@ -63,6 +63,7 @@
                     <div class="mb-3">
                         <label asp-for="Diagnostico" class="form-label">Diagnóstico:</label>
                         <textarea asp-for="Diagnostico" class="form-control" rows="1" required></textarea>
+                        <a href="http://tabnet.datasus.gov.br/cgi/sih/mxcid10lm.htm" style="font-size: smaller; font-style: italic;" target="_blank">Lista de Tabulação para Morbidade</a>
                     </div>
                     <div class="mb-3">
                         <label asp-for="AvaliacaoMedico" class="form-label">Avaliação do Médico Responsável:</label>

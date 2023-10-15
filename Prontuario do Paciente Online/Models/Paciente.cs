@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Prontuario_do_Paciente_Online.Models
 {
-    public class Paciente
+    public class Paciente : PacienteXProntuario
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -42,6 +42,11 @@ namespace Prontuario_do_Paciente_Online.Models
             CadastroAcesso = cadastroAcesso;
             StatusPaciente = statusPaciente;
         }
+    }
+
+    public class PacienteXProntuario
+    {
+        DateTime dataConsulta { get; set; }
     }
 }
 
