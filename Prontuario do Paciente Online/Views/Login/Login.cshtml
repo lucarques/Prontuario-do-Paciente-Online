@@ -30,12 +30,12 @@
                             <form method="post">
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <div class="mb-3 form-group">
-                                    <label asp-for="Email"></label>
+                                    <label for="Email" class="form-label">E-mail:</label>
                                     <input asp-for="Email" class="form-control" placeholder="Email" aria-label="Email">
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3 form-group">
-                                    <label asp-for="Password"></label>
+                                    <label for="Senha" class="form-label">Senha:</label>
                                     <input asp-for="Password" class="form-control" placeholder="Senha" aria-label="Email">
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>

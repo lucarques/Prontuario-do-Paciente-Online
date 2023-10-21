@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Prontuario_do_Paciente_Online.Models;
 using Prontuario_do_Paciente_Online.Models.Enums;
 using Prontuario_do_Paciente_Online.ViewModels;
+using System.Collections.Generic;
 
 namespace Prontuario_do_Paciente_Online.Services
 {
@@ -15,20 +16,20 @@ namespace Prontuario_do_Paciente_Online.Services
             _context = context;
         }
 
-        public bool VerificaProntuarioExistenteHoje(int pacienteId)
+        public bool VerificaProntuarioExistente(int pacienteId, DateTime data)
         {
-            DateTime dataHojeUtc = DateTime.Now.ToUniversalTime();
-            return _context.Prontuario.Any(p => p.PacienteId == pacienteId && p.DataProntuario.Day == dataHojeUtc.Day);
+            DateTime dataSelecionada = data.ToUniversalTime();
+            return _context.Prontuario.Any(p => p.PacienteId == pacienteId && p.DataProntuario.Date == dataSelecionada.Date);
         }
 
-        public ProntuarioViewModel ObterDetalhesDoProntuario(int pacienteId)
+        public ProntuarioViewModel ObterDetalhesDoProntuario(int pacienteId, DateTime dataSelecionada)
         {
-            DateTime dataHojeUtc = DateTime.Now.ToUniversalTime();
+            DateTime data = dataSelecionada.ToUniversalTime();
 
             var prontuario = _context.Prontuario
              .Include(x => x.Paciente)
              .Include(x => x.Medico)
-             .FirstOrDefault(x => x.PacienteId == pacienteId && x.DataProntuario.Day == dataHojeUtc.Day);
+             .FirstOrDefault(x => x.PacienteId == pacienteId && x.DataProntuario.Date == data.Date);
 
             var viewModel = new ProntuarioViewModel
             {
@@ -51,11 +52,33 @@ namespace Prontuario_do_Paciente_Online.Services
             return viewModel;
         }
 
-        public List<Paciente> ObterTodos()
+        public List<Paciente> ObterTodos(DateTime dataObter)
         {
-            return _context.Paciente.ToList();
-        }
+            dataObter = dataObter.Date.ToUniversalTime();
+            DateTime dataParaComparar = DateTime.Now;
 
+            List<Paciente> pacientesLista = _context.Paciente.ToList();
+            List<Paciente> pacientesComProntuarios = new List<Paciente>();
+
+            if(dataObter.Date != dataParaComparar.Date)
+            {
+                foreach (var paciente in pacientesLista)
+                {
+                    var pacientePossuiProntuario = _context.Prontuario
+                        .Any(p => p.PacienteId == paciente.Id && p.DataProntuario.Date == dataObter.Date);
+
+                    if (pacientePossuiProntuario)
+                    {
+                        pacientesComProntuarios.Add(paciente);
+                    }
+                }
+            }
+            else
+            {
+                pacientesComProntuarios = _context.Paciente.ToList();
+            }
+            return pacientesComProntuarios;
+        }
         public List<Prontuario> ObterTodosProntuario()
         {
             return _context.Prontuario.ToList();

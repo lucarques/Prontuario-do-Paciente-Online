@@ -111,7 +111,7 @@
                     </li>
                 }
 
-                @if (User.IsInRole("Acompanhante") || (User.IsInRole("Tecnologia")))
+                @if (User.IsInRole("Acompanhante"))
                 {
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Acompanhante" asp-action="Index">

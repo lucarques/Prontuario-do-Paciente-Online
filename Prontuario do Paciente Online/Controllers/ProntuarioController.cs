@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Prontuario_do_Paciente_Online.Models;
 using Prontuario_do_Paciente_Online.Services;
 using Prontuario_do_Paciente_Online.ViewModels;
 using System.Linq.Expressions;
+using System.Web.WebPages;
 
 namespace Prontuario_do_Paciente_Online.Controllers
 {
@@ -21,12 +23,23 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string filtroData)
         {
-            ViewBag.ProntuarioService = _prontuarioService;
-            var list = _prontuarioService.ObterTodos();
+            if (DateTime.TryParse(filtroData, out DateTime dataObter))
+            {
+                ViewBag.DataSelecionada = dataObter;
+            }
+            else
+            {
+                ViewBag.DataSelecionada = DateTime.Now;
+                dataObter = ViewBag.DataSelecionada;
+            }
+
+            var list = _prontuarioService.ObterTodos(dataObter);
+
             return View(list);
         }
+
 
         [HttpGet]
         public ActionResult ObterTodosMedicos()
@@ -56,9 +69,19 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
-        public ActionResult DetalhesProntuario(int id)
+        public ActionResult DetalhesProntuario(int id, string data)
         {
-            var prontuarioPaciente = _prontuarioService.ObterDetalhesDoProntuario(id);
+            DateTime dataConsulta;
+            if (DateTime.TryParse(data, out DateTime dataObter))
+            {
+                dataConsulta = dataObter;
+            }
+            else
+            {
+                dataConsulta = DateTime.Now.Date;
+            }
+
+            var prontuarioPaciente = _prontuarioService.ObterDetalhesDoProntuario(id, dataConsulta);
             return PartialView("_DetalhesProntuarioPaciente", prontuarioPaciente);
         }
 

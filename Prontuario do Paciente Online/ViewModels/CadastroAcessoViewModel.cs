@@ -25,7 +25,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirme a senha")]
         [Compare("Password", ErrorMessage = "As senhas não conferem")]
-        public string? ConfirmPassword { get; set;}
+        public string? ConfirmPassword { get; set; }
 
         [Required]
         [Display(Name = "Tipo de Acesso")]
@@ -35,5 +35,14 @@ namespace Prontuario_do_Paciente_Online.ViewModels
 
         public EnumStatusAcesso EnumStatusAcesso { get; set; }
 
+    }
+
+    public class CadastroAcessoListagemViewModel
+    {
+        public int Id { get; set; }
+        public string NomeCompleto { get; set; }
+        public string Email { get; set; }
+        public string PermissaoNome { get; set; }
+        public EnumStatusAcesso EnumStatusAcesso { get; set; }
     }
 }

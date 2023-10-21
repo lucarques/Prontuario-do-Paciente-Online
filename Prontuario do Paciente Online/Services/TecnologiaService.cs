@@ -11,7 +11,7 @@ namespace Prontuario_do_Paciente_Online.Services
         {
             _context = context;
         }
-        public IEnumerable<CadastroAcesso> ObterTodos()
+        public List<CadastroAcesso> ObterTodos()
         {
             return _context.CadastroAcesso.ToList();
         }
@@ -60,19 +60,11 @@ namespace Prontuario_do_Paciente_Online.Services
             return viewModel;
         }
 
-        public CadastroAcesso ObterPorTipoAcesso(string acesso)
+
+        public List<CadastroAcesso> ObterPorTipoAcesso(string acesso)
         {
-            var cadastroAcesso = _context.CadastroAcesso.FirstOrDefault(x => x.PermissaoNome == acesso);
-
-            var viewModel = new CadastroAcesso
-            {
-                NomeCompleto = cadastroAcesso!.NomeCompleto,
-                Email = cadastroAcesso.Email,
-                PermissaoNome = cadastroAcesso.PermissaoNome,
-                EnumStatusAcesso = cadastroAcesso.EnumStatusAcesso
-            };
-
-            return viewModel;
+            return _context.CadastroAcesso.Where(x => x.PermissaoNome == acesso).ToList();
         }
     }
 }
+

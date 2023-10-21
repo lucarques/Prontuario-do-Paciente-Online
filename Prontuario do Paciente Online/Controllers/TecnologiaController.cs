@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Prontuario_do_Paciente_Online.Models;
 using Prontuario_do_Paciente_Online.Services;
@@ -24,10 +25,36 @@ namespace Prontuario_do_Paciente_Online.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string? tipoAcesso)
         {
-            var users = _tecnologiaService.ObterTodos();
-            return View(users);
+            if(tipoAcesso == null)
+            {
+                var users = _tecnologiaService.ObterTodos();
+
+                var viewmodels = users.Select(result => new CadastroAcessoListagemViewModel()
+                {
+                    Id = result.Id,
+                    NomeCompleto = result.NomeCompleto,
+                    Email = result.Email,
+                    PermissaoNome = result.PermissaoNome,
+                    EnumStatusAcesso = result.EnumStatusAcesso
+                }).ToList();
+
+                return View(viewmodels);
+            }
+            else
+            {
+                var usuariosPorTipoAcesso = _tecnologiaService.ObterPorTipoAcesso(tipoAcesso);
+                var viewmodels = usuariosPorTipoAcesso.Select(result => new CadastroAcessoListagemViewModel()
+                {
+                    Id = result.Id,
+                    NomeCompleto = result.NomeCompleto,
+                    Email = result.Email,
+                    PermissaoNome = result.PermissaoNome,
+                    EnumStatusAcesso = result.EnumStatusAcesso
+                }).ToList();
+                return View(viewmodels);
+            }
         }
 
         [HttpGet]
@@ -35,13 +62,6 @@ namespace Prontuario_do_Paciente_Online.Controllers
         {
             var user = _tecnologiaService.ObterDetalhesPorId(id);
             return View(user);
-        }
-
-        [HttpGet]
-        public ActionResult ObterPorTipoAcesso(string tipoAcesso)
-        {
-            var result = _tecnologiaService.ObterPorTipoAcesso(tipoAcesso);
-            return Json(result);
         }
 
         [HttpGet]
