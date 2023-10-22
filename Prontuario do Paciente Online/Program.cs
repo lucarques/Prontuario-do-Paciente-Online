@@ -12,6 +12,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<ProntuarioService>();
 builder.Services.AddScoped<TecnologiaService>();
+builder.Services.AddScoped<HomeService>();
 
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(options => 

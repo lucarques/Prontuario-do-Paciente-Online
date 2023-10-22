@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Prontuario_do_Paciente_Online.Models
 {
-    public class Paciente : PacienteXProntuario
+    public class Paciente
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -21,11 +21,12 @@ namespace Prontuario_do_Paciente_Online.Models
         public Acompanhante Acompanhante { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
         public CadastroAcesso? CadastroAcesso { get; set; }
+        public Prontuario? Prontuario { get; set; }
         public Paciente()
         {
         }
 
-        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string? cid, string motivoInternacao, DateTime dataInternacao, Acompanhante acompanhante, CadastroAcesso cadastroAcesso, EnumStatus? statusPaciente)
+        public Paciente(int id, string nome, int idade, string cpf, string estado, string cidade, string endereco, int numero, string? cid, string motivoInternacao, DateTime dataInternacao, Acompanhante acompanhante, CadastroAcesso cadastroAcesso, EnumStatus? statusPaciente, Prontuario? prontuario)
         {
             Id = id;
             Nome = nome;
@@ -41,12 +42,8 @@ namespace Prontuario_do_Paciente_Online.Models
             Acompanhante = acompanhante;
             CadastroAcesso = cadastroAcesso;
             StatusPaciente = statusPaciente;
+            Prontuario = prontuario;
         }
-    }
-
-    public class PacienteXProntuario
-    {
-        DateTime dataConsulta { get; set; }
     }
 }
 
