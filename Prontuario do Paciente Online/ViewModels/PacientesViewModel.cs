@@ -28,11 +28,13 @@ namespace Prontuario_do_Paciente_Online.ViewModels
         public AcompanhanteViewModel? Acompanhante { get; set; }
         public CadastroAcessoViewModel? CadastroAcesso { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
+        public ProntuarioViewModel? UltimoProntuario { get; set; }
     }
 
     public class PacientesViewModelHome
     {
         public Prontuario Prontuario { get; set; }
         public Paciente Paciente { get; set; }
+        public EnumStatus? StatusPaciente { get; set; }
     }
 }

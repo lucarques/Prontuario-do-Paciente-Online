@@ -61,12 +61,26 @@ namespace Prontuario_do_Paciente_Online.Controllers
                     Id = id,
                     Nome = paciente.Nome,
                     DataInternacao = paciente.DataInternacao.Date
-
+                },
+                Prontuario = new Prontuario
+                {
+                    Diagnostico = string.Empty,
+                    Quarto = string.Empty
                 }
             };
 
+            if (paciente.UltimoProntuario != null)
+            {
+                model.Prontuario.Diagnostico = paciente.UltimoProntuario.Diagnostico;
+                model.Prontuario.Quarto = paciente.UltimoProntuario.Quarto;
+            }
+
+            ViewData["Quarto"] = model.Prontuario.Quarto;
+            ViewData["Diagnostico"] = model.Prontuario.Diagnostico;
+
             return PartialView("_AdicionarProntuarioPaciente", model);
         }
+
 
         [HttpGet]
         public ActionResult DetalhesProntuario(int id, string data)

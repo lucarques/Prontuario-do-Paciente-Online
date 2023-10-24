@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
+@using System.Text.Json;
 @model IEnumerable<Prontuario_do_Paciente_Online.ViewModels.PacientesViewModelHome>;
 @inject UserManager<IdentityUser> UserManager
 @{
@@ -11,7 +12,7 @@
 <style>
 
     .fixed-width-table {
-        width: 900px;
+        width: 1000px;
     }
 
     .bg-gradient-critico {
@@ -34,7 +35,7 @@
             <div class="row2">
                 <div class="card col-md-8 mr-20">
                     <div class="tittle-text m-4">
-                        <h3>RESUMO DE PACIENTES</h3>
+                        <h3>PACIENTES EM TRATAMENTO</h3>
                     </div>
                     @if (Model.Any())
                     {
@@ -93,6 +94,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </main>
     </body>
 }
@@ -101,17 +103,17 @@ else
     <p>Dashboard do Acompanhante</p>
 }
 
-</html>
 
 <script src="../../assets/js/plugins/chartjs.min.js"></script>
-
+<canvas id="pie-chart"></canvas>
 <script>
+    var statusCounts = @Html.Raw(JsonSerializer.Serialize(ViewBag.StatusCounts));
     var graficoPizza = document.getElementById('pie-chart').getContext("2d");
 
     new Chart(graficoPizza, {
         type: "doughnut",
         data: {
-            labels: ['Grave', 'Crítico', 'Estável'],
+            labels: Object.keys(statusCounts),
             datasets: [{
                 label: "Status",
                 weight: 9,
@@ -120,7 +122,7 @@ else
                 pointRadius: 2,
                 borderWidth: 2,
                 backgroundColor: ['#ff2121', '#ff9021', '#2cff21'],
-                data: [5, 10, 15],
+                data: Object.values(statusCounts),
                 fill: false
             }],
         },
@@ -163,9 +165,6 @@ else
         },
     });
 
-</script>
-
-<script>
     document.addEventListener("DOMContentLoaded", function () {
         var statusElements = document.querySelectorAll(".status");
 

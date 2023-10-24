@@ -51,7 +51,14 @@ namespace Prontuario_do_Paciente_Online.Services
 
         public PacientesViewModel ObterDetalhes(int id)
         {
-            var paciente = _context.Paciente.Include(x => x.Acompanhante).FirstOrDefault(x => x.Id == id);
+            var paciente = _context.Paciente
+                .Include(x => x.Acompanhante)
+                .FirstOrDefault(x => x.Id == id);
+
+            var ultimoProntuario = _context.Prontuario
+                .Where(prontuario => prontuario.PacienteId == id)
+                .OrderByDescending(prontuario => prontuario.DataProntuario)
+                .FirstOrDefault();
 
             var viewModel = new PacientesViewModel
             {
@@ -73,10 +80,18 @@ namespace Prontuario_do_Paciente_Online.Services
                     EnderecoAcompanhante = paciente.Acompanhante.EnderecoAcompanhante,
                     NumeroAcompanhante = paciente.Acompanhante.NumeroAcompanhante,
                     GrauParentesco = paciente.Acompanhante.GrauParentesco,
-                }
+                },
+                UltimoProntuario = ultimoProntuario != null ? new ProntuarioViewModel
+                {
+                    Quarto = ultimoProntuario.Quarto,
+                    Diagnostico = ultimoProntuario.Diagnostico,
+                    EnumStatus = ultimoProntuario.EnumStatus,
+                    DataProntuario = ultimoProntuario.DataProntuario,
+                } : null
             };
             return viewModel;
         }
+
 
         public void CadastrarPaciente(PacientesViewModel model)
         {

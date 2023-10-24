@@ -415,7 +415,8 @@ namespace Prontuario_do_Paciente_Online.Migrations
 
                     b.HasIndex("MedicoId");
 
-                    b.HasIndex("PacienteId");
+                    b.HasIndex("PacienteId")
+                        .IsUnique();
 
                     b.ToTable("Prontuario");
                 });
@@ -506,14 +507,19 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .IsRequired();
 
                     b.HasOne("Prontuario_do_Paciente_Online.Models.Paciente", "Paciente")
-                        .WithMany()
-                        .HasForeignKey("PacienteId")
+                        .WithOne("Prontuario")
+                        .HasForeignKey("Prontuario_do_Paciente_Online.Models.Prontuario", "PacienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Medico");
 
                     b.Navigation("Paciente");
+                });
+
+            modelBuilder.Entity("Prontuario_do_Paciente_Online.Models.Paciente", b =>
+                {
+                    b.Navigation("Prontuario");
                 });
 #pragma warning restore 612, 618
         }

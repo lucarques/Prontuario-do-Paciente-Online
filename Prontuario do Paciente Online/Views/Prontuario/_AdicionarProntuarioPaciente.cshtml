@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label class="form-control-label">Leito do paciente: </label>
-                                <input asp-for="Quarto" class="form-control" required>
+                                <input asp-for="Quarto" class="form-control" required value="@ViewData["Quarto"]">
                                 <span asp-validation-for="Quarto" class="text-danger"></span>
                             </div>
                         </div>
@@ -85,9 +85,10 @@
                     </div>
                     <div class="mb-3">
                         <label asp-for="Diagnostico" class="form-label">Diagnóstico:</label>
-                        <input asp-for="Diagnostico" class="form-control" rows="1" required>
+                        <input asp-for="Diagnostico" class="form-control" rows="1" required value="@ViewData["Diagnostico"]">
                         <a href="http://tabnet.datasus.gov.br/cgi/sih/mxcid10lm.htm" style="font-size: x-small; font-style: italic;" target="_blank">Lista de Tabulação para Morbidade</a>
                     </div>
+
                     <div class="mb-3">
                         <label asp-for="AvaliacaoMedico" class="form-label">Avaliação do Médico Responsável:</label>
                         <textarea asp-for="AvaliacaoMedico" class="form-control limited-textarea" rows="6" required></textarea>

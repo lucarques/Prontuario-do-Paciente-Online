@@ -23,6 +23,9 @@ namespace Prontuario_do_Paciente_Online.Controllers
         {
             var PacientesComProntuario = _homeService.ObterTodosPacienteComProntuarios();
 
+            var statusCounts = _homeService.ContarPacientesPorStatus(PacientesComProntuario);
+            ViewBag.StatusCounts = statusCounts;
+
             var modelList = PacientesComProntuario.Select(pacienteProntuario => new PacientesViewModelHome
             {
                 Paciente = new Paciente
@@ -30,18 +33,20 @@ namespace Prontuario_do_Paciente_Online.Controllers
                     Nome = pacienteProntuario.Paciente.Nome,
                     DataInternacao = pacienteProntuario.Paciente.DataInternacao
                 },
-                Prontuario = new Prontuario
-                {
-                    Quarto = pacienteProntuario.Prontuario.Quarto,
-                    Diagnostico = pacienteProntuario.Prontuario.Diagnostico,
-                    EnumStatus = pacienteProntuario.Prontuario.EnumStatus,
-                    DataProntuario = pacienteProntuario.Prontuario.DataProntuario
-
-                }
+                Prontuario = pacienteProntuario.Prontuario != null
+                    ? new Prontuario
+                    {
+                        Quarto = pacienteProntuario.Prontuario.Quarto,
+                        Diagnostico = pacienteProntuario.Prontuario.Diagnostico,
+                        EnumStatus = pacienteProntuario.Prontuario.EnumStatus,
+                        DataProntuario = pacienteProntuario.Prontuario.DataProntuario
+                    }
+                    : new Prontuario()
             }).ToList();
 
             return View(modelList);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
