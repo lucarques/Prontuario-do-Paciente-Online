@@ -6,33 +6,59 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<html>
-<head>
-    <title>Informações do Prontuário do Paciente</title>
-</head>
-<body>
-    <h1>Informações do Prontuário do Paciente</h1>
-    <table>
-        <tr>
-            <th>Nome Paciente:</th>
-            <td>@Model.Paciente.Nome</td>
-        </tr>
-        <tr>
-            <th>Status do Paciente:</th>
-            <td>@Model.Prontuario.EnumStatus</td>
-        </tr>
-        <tr>
-            <th>Médico Responsável:</th>
-            <td>@Model.Medico.Nome</td>
-        </tr>
-        <tr>
-            <th>Data da Última Atualização do Prontuário:</th>
-            <td>@Model.Prontuario.DataProntuario.ToString("dd/MM/yyyy HH:mm:ss")</td>
-        </tr>
-        <tr>
-            <th>Avaliação Médica:</th>
-            <td>@Model.Prontuario.AvaliacaoMedico</td>
-        </tr>
-    </table>
-</body>
-</html>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Prontuário do Paciente Online</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="nome" class="form-label">Nome do Paciente:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.Paciente.Nome" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="leito" class="form-label">Diagnostico:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.Prontuario.Diagnostico" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="data-prontuario" class="form-label">Data da última atualização do prontuário:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.Prontuario.DataProntuario.ToString("dd/MM/yyyy")" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="medico" class="form-label">Médico Responsável pelo paciente:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@($"({Model.Medico.Crm}) Dr(a). {Model.Medico.Nome}")" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="status" class="form-label">Status do paciente:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.Prontuario.EnumStatus" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="diagnostico" class="form-label">Diagnostico:</label>
+                            <input type="text" class="form-control btn-gray-background" value="@Model.Prontuario.Diagnostico" readonly>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="col-md-12">
+                        <label for="avaliacao" class="form-label">Avaliação do médico responsável:</label>
+                        <textarea class="form-control btn-gray-background limited-textarea" rows="8" readonly>@Model.Prontuario.AvaliacaoMedico</textarea>
+                        <p style="font-size: x-small; font-style: italic;">Data avaliação médico responsável: @Model.Prontuario.DataProntuario.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
