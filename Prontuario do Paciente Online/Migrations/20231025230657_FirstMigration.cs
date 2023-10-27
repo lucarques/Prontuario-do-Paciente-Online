@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeiraMigration : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -332,17 +332,6 @@ namespace Prontuario_do_Paciente_Online.Migrations
                 name: "IX_Paciente_CadastroAcessoId",
                 table: "Paciente",
                 column: "CadastroAcessoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Prontuario_MedicoId",
-                table: "Prontuario",
-                column: "MedicoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Prontuario_PacienteId",
-                table: "Prontuario",
-                column: "PacienteId",
-                unique: true);
         }
 
         /// <inheritdoc />

@@ -13,7 +13,7 @@ namespace Prontuario_do_Paciente_Online.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly HomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger,HomeService homeService)
+        public HomeController(ILogger<HomeController> logger, HomeService homeService)
         {
             _logger = logger;
             _homeService = homeService;
@@ -21,30 +21,39 @@ namespace Prontuario_do_Paciente_Online.Controllers
 
         public ActionResult Index()
         {
-            var PacientesComProntuario = _homeService.ObterTodosPacienteComProntuarios();
-
-            var statusCounts = _homeService.ContarPacientesPorStatus(PacientesComProntuario);
-            ViewBag.StatusCounts = statusCounts;
-
-            var modelList = PacientesComProntuario.Select(pacienteProntuario => new PacientesViewModelHome
+            if (!User.IsInRole("Acompanhante"))
             {
-                Paciente = new Paciente
-                {
-                    Nome = pacienteProntuario.Paciente.Nome,
-                    DataInternacao = pacienteProntuario.Paciente.DataInternacao
-                },
-                Prontuario = pacienteProntuario.Prontuario != null
-                    ? new Prontuario
-                    {
-                        Quarto = pacienteProntuario.Prontuario.Quarto,
-                        Diagnostico = pacienteProntuario.Prontuario.Diagnostico,
-                        EnumStatus = pacienteProntuario.Prontuario.EnumStatus,
-                        DataProntuario = pacienteProntuario.Prontuario.DataProntuario
-                    }
-                    : new Prontuario()
-            }).ToList();
+                var PacientesComProntuario = _homeService.ObterTodosPacienteComProntuarios();
 
-            return View(modelList);
+                var statusCounts = _homeService.ContarPacientesPorStatus(PacientesComProntuario);
+                ViewBag.StatusCounts = statusCounts;
+
+                var modelList = PacientesComProntuario.Select(pacienteProntuario => new PacientesViewModelHome
+                {
+                    Paciente = new Paciente
+                    {
+                        Nome = pacienteProntuario.Paciente.Nome,
+                        DataInternacao = pacienteProntuario.Paciente.DataInternacao
+                    },
+                    Prontuario = pacienteProntuario.Prontuario != null
+                        ? new Prontuario
+                        {
+                            Quarto = pacienteProntuario.Prontuario.Quarto,
+                            Diagnostico = pacienteProntuario.Prontuario.Diagnostico,
+                            EnumStatus = pacienteProntuario.Prontuario.EnumStatus,
+                            DataProntuario = pacienteProntuario.Prontuario.DataProntuario
+                        }
+                        : new Prontuario()
+                }).ToList();
+                return View(modelList);
+            }
+            else
+            {
+                string email = User.Identity.Name;
+                var model = _homeService.ObterProntuarioDoPacientePorEmailAcompanhante(email);
+                return View("_partialDadosAcompanhante",model);
+            }
+
         }
 
 

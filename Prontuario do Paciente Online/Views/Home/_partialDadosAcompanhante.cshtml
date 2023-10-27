@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model Prontuario_do_Paciente_Online.ViewModels.PacientesViewModelHome;
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<html>
+<head>
+    <title>Informações do Prontuário do Paciente</title>
+</head>
+<body>
+    <h1>Informações do Prontuário do Paciente</h1>
+    <table>
+        <tr>
+            <th>Nome Paciente:</th>
+            <td>@Model.Paciente.Nome</td>
+        </tr>
+        <tr>
+            <th>Status do Paciente:</th>
+            <td>@Model.Prontuario.EnumStatus</td>
+        </tr>
+        <tr>
+            <th>Médico Responsável:</th>
+            <td>@Model.Medico.Nome</td>
+        </tr>
+        <tr>
+            <th>Data da Última Atualização do Prontuário:</th>
+            <td>@Model.Prontuario.DataProntuario.ToString("dd/MM/yyyy HH:mm:ss")</td>
+        </tr>
+        <tr>
+            <th>Avaliação Médica:</th>
+            <td>@Model.Prontuario.AvaliacaoMedico</td>
+        </tr>
+    </table>
+</body>
+</html>

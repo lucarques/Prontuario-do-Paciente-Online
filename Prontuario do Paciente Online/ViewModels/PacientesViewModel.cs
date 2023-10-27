@@ -35,6 +35,7 @@ namespace Prontuario_do_Paciente_Online.ViewModels
     {
         public Prontuario Prontuario { get; set; }
         public Paciente Paciente { get; set; }
+        public Medico Medico { get; set; }
         public EnumStatus? StatusPaciente { get; set; }
     }
 }

@@ -4,18 +4,19 @@
     {
         public int Id { get; set; }
         public string NomeAcompanhante { get; set; }
+        public string EmailAcompanhante { get; set; }
         public string CpfAcompanhante { get; set; }
         public string EstadoAcompanhante { get; set; }
         public string CidadeAcompanhante { get; set; }
         public string EnderecoAcompanhante { get; set; }
         public int NumeroAcompanhante { get; set; }
         public string GrauParentesco { get; set; }
-
+        
         public Acompanhante()
         {
         }
 
-        public Acompanhante(int id, string nomeAcompanhante, string cpfAcompanhante, string estadoAcompanhante, string cidadeAcompanhante, string enderecoAcompanhante, int numeroAcompanhante, string grauParentesco)
+        public Acompanhante(int id, string nomeAcompanhante, string cpfAcompanhante, string estadoAcompanhante, string cidadeAcompanhante, string enderecoAcompanhante, int numeroAcompanhante, string grauParentesco, string emailAcompanhante)
         {
             Id = id;
             NomeAcompanhante = nomeAcompanhante;
@@ -25,6 +26,7 @@
             EnderecoAcompanhante = enderecoAcompanhante;
             NumeroAcompanhante = numeroAcompanhante;
             GrauParentesco = grauParentesco;
+            EmailAcompanhante = emailAcompanhante;
         }
     }
 }

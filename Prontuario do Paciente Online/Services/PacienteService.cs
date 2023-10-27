@@ -92,7 +92,16 @@ namespace Prontuario_do_Paciente_Online.Services
             return viewModel;
         }
 
+        public void CadastrarEmailAcompanhante( Acompanhante model)
+        {
+            Acompanhante cadastraEmailAcompanhante = new Acompanhante
+            {
+                EmailAcompanhante = model.EmailAcompanhante
+            };
 
+            _context.Acompanhante.Add(cadastraEmailAcompanhante);
+            _context.SaveChanges();
+        }
         public void CadastrarPaciente(PacientesViewModel model)
         {
             try
@@ -111,6 +120,7 @@ namespace Prontuario_do_Paciente_Online.Services
                     Acompanhante = new Acompanhante
                     {
                         NomeAcompanhante = model.Acompanhante!.NomeAcompanhante,
+                        EmailAcompanhante = model.CadastroAcesso!.Email,
                         CpfAcompanhante = model.Acompanhante!.CpfAcompanhante,
                         EstadoAcompanhante = model.Acompanhante!.EstadoAcompanhante,
                         CidadeAcompanhante = model.Acompanhante!.CidadeAcompanhante,
@@ -167,5 +177,7 @@ namespace Prontuario_do_Paciente_Online.Services
                 }
             }
         }
+
+
     }
 }

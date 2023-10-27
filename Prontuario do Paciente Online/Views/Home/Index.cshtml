@@ -16,15 +16,15 @@
     }
 
     .bg-gradient-critico {
-        background: linear-gradient(to right, #FF5733, #D20000);
+        background: linear-gradient(to right, #ff9021, #b26417);
     }
 
     .bg-gradient-estavel {
-        background: linear-gradient(to right, #53d569, #33FF57);
+        background: linear-gradient(to right, #2cff20, #1a9913);
     }
 
     .bg-gradient-grave {
-        background: linear-gradient(to right, #3373FF, #5733FF);
+        background: linear-gradient(to right, #ff2121, #b21717);
     }
 
 </style>
@@ -97,98 +97,96 @@
             </div>
         </main>
     </body>
+
+    <script src="../../assets/js/plugins/chartjs.min.js"></script>
+    <canvas id="pie-chart"></canvas>
+    <script>
+        var statusCounts = @Html.Raw(JsonSerializer.Serialize(ViewBag.StatusCounts));
+        var graficoPizza = document.getElementById('pie-chart').getContext("2d");
+
+        new Chart(graficoPizza, {
+            type: "doughnut",
+            data: {
+                labels: Object.keys(statusCounts),
+                datasets: [{
+                    label: "Status",
+                    weight: 9,
+                    cutout: 60,
+                    tension: 0.9,
+                    pointRadius: 2,
+                    borderWidth: 2,
+                    backgroundColor: ['#ff2121', '#ff9021', '#2cff21'],
+                    data: Object.values(statusCounts),
+                    fill: false
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                },
+            },
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var statusElements = document.querySelectorAll(".status");
+
+            statusElements.forEach(function (statusElement) {
+                var status = statusElement.innerHTML.trim();
+
+                switch (status) {
+                    case "Critico":
+                        statusElement.classList.add("bg-gradient-critico");
+                        break;
+                    case "Grave":
+                        statusElement.classList.add("bg-gradient-grave");
+                        break;
+                    case "Estavel":
+                        statusElement.classList.add("bg-gradient-estavel");
+                        break;
+                    default:
+                        break;
+                }
+            });
+        });
+    </script>
 }
 else
 {
-    <p>Dashboard do Acompanhante</p>
+    <div id="_partialDadosAcompanhante"></div>
+
 }
-
-
-<script src="../../assets/js/plugins/chartjs.min.js"></script>
-<canvas id="pie-chart"></canvas>
-<script>
-    var statusCounts = @Html.Raw(JsonSerializer.Serialize(ViewBag.StatusCounts));
-    var graficoPizza = document.getElementById('pie-chart').getContext("2d");
-
-    new Chart(graficoPizza, {
-        type: "doughnut",
-        data: {
-            labels: Object.keys(statusCounts),
-            datasets: [{
-                label: "Status",
-                weight: 9,
-                cutout: 60,
-                tension: 0.9,
-                pointRadius: 2,
-                borderWidth: 2,
-                backgroundColor: ['#ff2121', '#ff9021', '#2cff21'],
-                data: Object.values(statusCounts),
-                fill: false
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                    },
-                    ticks: {
-                        display: false
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                    },
-                    ticks: {
-                        display: false,
-                    }
-                },
-            },
-        },
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        var statusElements = document.querySelectorAll(".status");
-
-        statusElements.forEach(function (statusElement) {
-            var status = statusElement.innerHTML.trim();
-
-            switch (status) {
-                case "Critico":
-                    statusElement.classList.add("bg-gradient-critico");
-                    break;
-                case "Estavel":
-                    statusElement.classList.add("bg-gradient-estavel");
-                    break;
-                case "Grave":
-                    statusElement.classList.add("bg-gradient-grave");
-                    break;
-                default:
-                    // Handle other status values if needed
-                    break;
-            }
-        });
-    });
-</script>
-
 
 
 
