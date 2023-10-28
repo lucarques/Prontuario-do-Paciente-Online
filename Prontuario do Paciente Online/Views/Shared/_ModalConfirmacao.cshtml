@@ -1,0 +1,32 @@
+﻿
+<div class="modal fade" id="confirmCadastroModal" tabindex="-1" role="dialog" aria-labelledby="confirmCadastroModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmCadastroModalLabel">Confirmar Cadastro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza de que deseja confirmar o cadastro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmar">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+$(document).ready(function () {
+    $('#btnConfirmCadastro').click(function () {
+        $('#confirmCadastroModal').modal('show');
+    });
+
+    $('#btnConfirmar').click(function () {
+        // Aqui você pode adicionar a lógica para confirmar o cadastro, por exemplo, fazer uma chamada AJAX.
+        // Após a confirmação, você pode fechar a modal.
+        $('#confirmCadastroModal').modal('hide');
+    });
+});

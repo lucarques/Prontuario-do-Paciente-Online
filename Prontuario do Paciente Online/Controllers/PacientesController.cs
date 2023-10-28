@@ -71,8 +71,9 @@ namespace Prontuario_do_Paciente_Online.Controllers
                         if (role != null)
                             await userManager.AddToRoleAsync(user, role.Name);
                         _pacienteService.CadastrarPaciente(model);
-
+                        TempData["CadastroSucesso"] = true;
                         return RedirectToAction("Index");
+                        
                     }
                     foreach (var error in result.Errors)
                     {

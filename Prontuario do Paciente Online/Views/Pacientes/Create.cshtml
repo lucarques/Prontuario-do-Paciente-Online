@@ -11,7 +11,6 @@
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <html>
 <body>
     <div class="main-content mt-4 ">
@@ -229,14 +228,13 @@
                                 </div>
                             </div>
                         </div>
-
                         <input type="hidden" asp-for="CadastroAcesso.PermissaoNome" value="@EnumPermissoes.Acompanhante"> @*sempre cria com permissão acompanhante*@
                         <input type="hidden" asp-for="CadastroAcesso.EnumStatusAcesso" value="1"> @*sempre cria com status acesso ativo*@
                         <hr />
                         <div class="d-flex justify-content-end">
                             <div class="col-md-3">
                                 <a href="@Url.Action("Index", "Home")" type="button" class="btn btn-secondary btn-sm">Cancelar</a>
-                                <button type="submit" onclick="inseriNomeAcompanhante()" class="btn btn-primary btn-sm">Salvar</button>
+                                <button type="submit" onclick="inseriNomeAcompanhante()" class="btn btn-primary btn-sm">Cadastrar</button>
                             </div>
                         </div>
                     </form>
@@ -253,3 +251,7 @@
         jQuery('#CadastroAcesso_NomeCompleto').val(valorCampoNomeAcompanhante);
     }
 </script>
+
+
+
+
