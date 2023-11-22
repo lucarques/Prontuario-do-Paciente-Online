@@ -12,8 +12,8 @@ using Prontuario_do_Paciente_Online.Models;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20231025230657_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20231119163527_PrimeiraMigration")]
+    partial class PrimeiraMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,6 +234,10 @@ namespace Prontuario_do_Paciente_Online.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CpfAcompanhante")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("EmailAcompanhante")
                         .IsRequired()
                         .HasColumnType("text");
 

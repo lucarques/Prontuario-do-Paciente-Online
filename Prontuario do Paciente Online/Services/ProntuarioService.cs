@@ -24,12 +24,10 @@ namespace Prontuario_do_Paciente_Online.Services
 
         public ProntuarioViewModel ObterDetalhesDoProntuario(int pacienteId, DateTime dataSelecionada)
         {
-            DateTime data = dataSelecionada.ToUniversalTime();
-
             var prontuario = _context.Prontuario
              .Include(x => x.Paciente)
              .Include(x => x.Medico)
-             .FirstOrDefault(x => x.PacienteId == pacienteId && x.DataProntuario.Date == data.Date);
+             .FirstOrDefault(x => x.PacienteId == pacienteId && x.DataProntuario.Date == dataSelecionada.ToUniversalTime().Date);
 
             var viewModel = new ProntuarioViewModel
             {

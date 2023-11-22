@@ -26,7 +26,6 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
-
 <body class="g-sidenav-show bg-gray-100">
     <div class="min-height-100 bg-default position-absolute w-100 mb-4"></div>
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
@@ -52,7 +51,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Pacientes" asp-action="Create">
                                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ni ni-fat-add text-info text-sm opacity-10"></i>
+                                        <i class="ni ni-fat-add text-primary text-sm opacity-10"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Cadastrar Pacientes</span>
                                 </a>
@@ -60,7 +59,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Pacientes" asp-action="Index">
                                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ni ni-zoom-split-in text-info text-sm opacity-10"></i>
+                                        <i class="ni ni-single-02 text-primary text-sm opacity-10"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Pacientes Cadastrados</span>
                                 </a>
@@ -74,7 +73,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#submenu-tecnologia">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-settings-gear-65 text-primary text-sm opacity-10"></i>
+                                <i class="ni ni-settings-gear-65 text-info text-sm opacity-10"></i>
                             </div>
                             <span class="nav-link-text ms-1">Tecnologia</span>
                         </a>
@@ -82,7 +81,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Tecnologia" asp-action="RegistrarUsuario">
                                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ni ni-fat-add text-primary text-sm opacity-10 disabled"></i>
+                                        <i class="ni ni-fat-add text-info text-sm opacity-10 disabled"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Cadastrar Usuario</span>
                                 </a>
@@ -90,7 +89,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="tecnologia" asp-action="index">
                                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ni ni-single-02 text-primary text-sm opacity-10"></i>
+                                        <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Usuarios Cadastrados</span>
                                 </a>
@@ -99,22 +98,33 @@
                     </li>
                 }
 
-                @if (User.IsInRole("Medico") || (User.IsInRole("Tecnologia")))
+                @if (User.IsInRole("Medico") || User.IsInRole("Tecnologia"))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Prontuario" asp-action="Index">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#submenu-prontuario">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-badge text-success text-sm opacity-10"></i>
+                                <i class="ni ni-bag-17 text-success text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Prontuario</span>
+                            <span class="nav-link-text ms-1">Prontuário</span>
                         </a>
+                        <ul class="navbar-nav collapse" id="submenu-prontuario">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Prontuario" asp-action="Index">
+                                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="ni ni-fat-add text-success text-sm opacity-10"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Adicionar Prontuário</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 }
+
 
                 @if (User.IsInRole("Acompanhante"))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Acompanhante" asp-action="Index">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
                             </div>
@@ -122,8 +132,7 @@
                         </a>
                     </li>
                 }
-               
-            </ul>
+
         </div>
     </aside>
     <main class="main-content position-relative border-radius-lg ">
@@ -139,23 +148,25 @@
                 </nav>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <ul class="nav-item d-flex">
-                        <li class="nav-link">
-                            <span class="text-white">
-                                <p>
-                                    Olá, @User.Identity.Name.Split('@')[0]
-                                </p>
-                               
-                            </span>
-                        </li>
-                        <li class="nav-link">
-                            <form method="post" asp-controller="Login" asp-action="Logout">
-                                <button type="submit" class="btn btn-link py-0 text-white color-background">
-                                    <i class="fa fa-sign-out"></i> Sair
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="nav-item d-flex">
+                            <li class="nav-link">
+                                <span class="text-white">
+                                    <p>
+                                        Olá, @User.Identity.Name.Split('@')[0]
+                                    </p>
+                                </span>
+                            </li>
+                            <li class="nav-link">
+                                <form method="post" asp-controller="Login" asp-action="Logout">
+                                    <button type="submit" class="btn btn-link py-0 text-white color-background">
+                                        <i class="fa fa-sign-out"></i> Sair
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    }
                 }
                 else
                 {
@@ -192,6 +203,7 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

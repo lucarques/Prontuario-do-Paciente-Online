@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Prontuario_do_Paciente_Online.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class PrimeiraMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,6 +19,7 @@ namespace Prontuario_do_Paciente_Online.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     NomeAcompanhante = table.Column<string>(type: "text", nullable: false),
+                    EmailAcompanhante = table.Column<string>(type: "text", nullable: false),
                     CpfAcompanhante = table.Column<string>(type: "text", nullable: false),
                     EstadoAcompanhante = table.Column<string>(type: "text", nullable: false),
                     CidadeAcompanhante = table.Column<string>(type: "text", nullable: false),
@@ -327,11 +328,6 @@ namespace Prontuario_do_Paciente_Online.Migrations
                 name: "IX_Paciente_AcompanhanteId",
                 table: "Paciente",
                 column: "AcompanhanteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Paciente_CadastroAcessoId",
-                table: "Paciente",
-                column: "CadastroAcessoId");
         }
 
         /// <inheritdoc />
